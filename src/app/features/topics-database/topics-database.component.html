@@ -1,0 +1,25 @@
+<div
+  class="absolute top-0 left-0 w-screen h-screen flex justify-center items-center"
+  [ngClass]="{ 'backdrop-blur': active, invisible: !active }"
+>
+  <div class="bg-white border w-2/3 h-2/3 overflow-y-scroll">
+    <div class="border-b drop-shadow flex justify-end p-1">
+      <button
+        (click)="doClose()"
+        class="flex justify-center items-center text-xs"
+      >
+        <ng-icon name="matFullscreenExit"></ng-icon> Close
+      </button>
+    </div>
+    <app-topic-viewer
+      *ngIf="screen == 'list'"
+      [topics]="topics"
+      (selectedTopic)="selectTopic($event)"
+    ></app-topic-viewer>
+    <app-topic-editor
+      *ngIf="screen == 'editor'"
+      [selectedTopic]="selectedTopicId"
+      (done)="screen = 'list'"
+    ></app-topic-editor>
+  </div>
+</div>

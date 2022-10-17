@@ -1,0 +1,17 @@
+<div class="absolute top-0 left-0 w-screen h-screen backdrop-blur flex justify-center items-center">
+    <div class="bg-white border p-4 w-max h-max max-h-full overflow-y-scroll">
+        <h1 class="text-lg mb-2">Characters</h1>
+        <div *ngFor="let character of characters" class="border mb-2">
+            <h2 class="font-semibold">{{character.name}}</h2>
+            <h3 class="text-gray-500">{{character.sdesc}}</h3>
+            <p>{{character.notes}}</p>
+        </div>
+        <div class="flex">
+            <input type="text" placeholder="Name" class="border" [(ngModel)]="newCharacter.name">
+            <input type="text" placeholder="Sdesc"  class="border" [(ngModel)]="newCharacter.sdesc">
+            <input type="text" placeholder="Notes" class="border" [(ngModel)]="newCharacter.notes">
+            <button class="bg-green-500 rounded p-1" (click)="createCharacter()">Submit</button>
+            <button class="bg-green-500 rounded p-1" (click)="close()">CLose</button>
+        </div>
+    </div>
+</div>

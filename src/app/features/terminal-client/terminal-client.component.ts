@@ -29,11 +29,12 @@ export class TerminalClientComponent implements OnInit, AfterViewInit {
         cursor: '#111827',
       },
       minimumContrastRatio: 7,
-      disableStdin: true,
     });
     this.term.onData().subscribe((input) => {
       console.log(input);
     });
+
+    this.term.setDraggable
 
     this.telnet.on(
       'message',

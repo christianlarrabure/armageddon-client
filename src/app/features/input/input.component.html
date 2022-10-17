@@ -1,18 +1,20 @@
-<p
-  class="absolute right-6 bottom-6 text-xs text-gray-300/75"
-  [ngClass]="{
-    'text-orange-500/75': input.length > 240,
-    'text-red-500/75': input.length > 250
-  }"
->
-  {{ input.length }}/248
-</p>
-<textarea
-  type="text"
-  class="w-full bg-gray-800 text-white rounded focus:ring-0 focus:border-transparent border-transparent"
-  [(ngModel)]="input"
-  (keyup.enter)="submitInput()"
-  (keydown.enter)="keydownEnter($event)"
-  (keyup.arrowup)="historyUp()"
-  (keyup.arrowdown)="historyDown()"
-></textarea>
+<div class="relative">
+  <textarea
+    type="text"
+    class="w-full h-full bg-gray-800 text-white rounded focus:ring-0 focus:border-transparent border-transparent"
+    [(ngModel)]="input"
+    (keyup.enter)="submitInput()"
+    (keydown.enter)="keydownEnter($event)"
+    (keyup.arrowup)="historyUp()"
+    (keyup.arrowdown)="historyDown()"
+  ></textarea>
+  <p
+    class="absolute right-2 bottom-3 text-xs text-gray-300/75"
+    [ngClass]="{
+      'text-orange-500/75': input.length > 240,
+      'text-red-500/75': input.length > 250
+    }"
+  >
+    {{ input.length }}/248
+  </p>
+</div>

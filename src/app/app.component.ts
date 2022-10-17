@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent{
   title = 'client';
+  showCharacters:boolean = false;
+
+  handleClick(type:string) {
+    if(type=="characters") {
+      this.showCharacters = true;
+    }
+  }
 }

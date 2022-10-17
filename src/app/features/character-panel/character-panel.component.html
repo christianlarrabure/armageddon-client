@@ -1,0 +1,113 @@
+<div class="h-full w-full flex flex-col justify-end bg-gray-800 p-2 pb-4">
+<!--   <p>{{ character.longDescriptionStatus }}</p>
+  <p>{{ character.longDescription }}</p>
+  <p>{{ character.visibility }}</p>
+  <p>{{ character.flying }}</p>
+  <p>{{ character.mount }}</p>
+  <p>{{ character.speed }}</p>
+  <p>{{ character.mood }}</p>
+  <p>{{ character.scan }}</p>
+  <p>{{ character.listen }}</p>
+  <p>{{ character.stance }}</p>
+  <p>{{ character.drunk }}</p>
+  <p>{{ character.combatQuit }}</p>
+
+ -->  <h1 class="text-xl text-white">{{ character.name }}</h1>
+  <div>
+    <button (click)="openCharacters()"><ng-icon name="matGroup"></ng-icon> Character Notes</button>
+  </div>
+  <div class="text-xs flex items-center gap-1" [ngClass]="{'text-red-500':character.armed=='armed', 'text-gray-500':character.armed!=='armed'}" *ngIf="character.armed !== ''">
+  <ng-icon name="jamSwordF" *ngIf="character.armed=='armed'"></ng-icon>
+  <ng-icon name="matFrontHand" *ngIf="character.armed=='unarmed'"></ng-icon>
+  <p>{{character.armed}}</p>
+</div>
+<div class="flex text-white text-xs items-center gap-1">
+    <ng-icon
+      name="matNightlight"
+      *ngIf="
+        character.time == 'late at night' || character.time == 'before dawn'
+      "
+    ></ng-icon>
+    <ng-icon
+      name="matWbSunny"
+      *ngIf="
+        character.time == 'early morning' ||
+        character.time == 'late morning' ||
+        character.time == 'high sun' ||
+        character.time == 'early afternoon' ||
+        character.time == 'late afternoon'
+      "
+    ></ng-icon>
+    <ng-icon
+      name="matWbTwilight"
+      *ngIf="character.time == 'dawn' || character.time == 'dusk'"
+    ></ng-icon>
+    <p>{{ character.time }} on {{character.day}}</p>
+  </div>
+  <div class="flex text-white text-xs items-center gap-1">
+    <ng-icon name="matBoy" *ngIf="character.position == 'standing'"></ng-icon>
+    <ng-icon
+      name="matChairAlt"
+      *ngIf="character.position == 'sitting'"
+    ></ng-icon>
+    <ng-icon name="matBed" *ngIf="character.position == 'resting'"></ng-icon>
+    <p>{{ character.verbosePosition }}</p>
+  </div>
+  <div class="flex text-white text-xs items-center gap-1">
+    <ng-icon
+      name="matTranslate"
+      *ngIf="character.accent"
+    ></ng-icon>
+    <p *ngIf="character.accent">{{ character.accent }}-accented {{character.language}}</p>
+  </div>
+  <div class="flex text-white text-xs items-center gap-1" *ngIf="character.encumberance">
+    <ng-icon
+      name="heroScaleSolid"
+    ></ng-icon>
+    <p>{{ character.encumberance }}</p>
+  </div>
+  <app-attribute-progress-bar
+    attribute="Health"
+    color="red"
+    [value]="character.hp"
+    [maxValue]="character.maxHp"
+  ></app-attribute-progress-bar>
+  <app-attribute-progress-bar
+    attribute="Mana"
+    color="green"
+    [value]="character.mana"
+    [maxValue]="character.maxMana"
+  ></app-attribute-progress-bar>
+  <app-attribute-progress-bar
+    attribute="Stamina"
+    color="blue"
+    [value]="character.stamina"
+    [maxValue]="character.maxStamina"
+  ></app-attribute-progress-bar>
+  <app-attribute-progress-bar
+    attribute="Stun"
+    color="gray"
+    [value]="character.stun"
+    [maxValue]="character.maxStun"
+  ></app-attribute-progress-bar>
+  <app-attribute-progress-bar
+    attribute="Focus"
+    color="cyan"
+    [value]="character.focus"
+    [maxValue]="character.maxFocus"
+  ></app-attribute-progress-bar>
+  <app-attribute-progress-bar
+    attribute="Hunger"
+    color="hunger"
+    [value]="getHungerValue()"
+    [maxValue]="getHungerMaxValue()"
+    [valueLabel]="character.hunger"
+  ></app-attribute-progress-bar>
+  <app-attribute-progress-bar
+    attribute="Thirst"
+    color="thirst"
+    [value]="getThirstValue()"
+    [maxValue]="getThirstMaxValue()"
+    [valueLabel]="character.thirst"
+  ></app-attribute-progress-bar>
+</div>
