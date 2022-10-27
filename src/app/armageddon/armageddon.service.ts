@@ -9,6 +9,7 @@ export class ArmageddonService {
   private _ipc: IpcRenderer = window.require('electron').ipcRenderer;
   public messages: Subject<string> = new Subject();
   public rawMessages: Subject<string> = new Subject();
+  private messages$ = this.rawMessages.asObservable().pipe();
   private cachedMessage: string = '';
 
   sendCachedMessage() {
@@ -31,10 +32,14 @@ export class ArmageddonService {
       }
     });
     this._ipc.on('message', (event: any, message: string) => {
-      const msgs = message.split('\r');
+      const msgs = message.split('\n');
       for (let i = 0; i < msgs.length; i++) {
         const msg = msgs[i].replace('\r', '');
-        this.rawMessages.next(`${msg}`);
+        let token = '';
+        if (i < msgs.length) {
+          token = '\r\n';
+        }
+        this.rawMessages.next(`${msg}${token}`);
       }
     });
   }
