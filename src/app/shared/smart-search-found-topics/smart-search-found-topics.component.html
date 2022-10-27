@@ -1,0 +1,19 @@
+<div
+  class="p-2 rounded hover:bg-green-300 bg-gray-100 m-2 drop-shadow-sm transition cursor-pointer"
+  (click)="newTopic()"
+>
+  <h2 class="text-lg">Add new</h2>
+</div>
+<div
+  *ngFor="let topic of topics"
+  class="p-2 rounded hover:bg-green-300 bg-gray-100 m-2 drop-shadow-sm transition cursor-pointer"
+  (click)="openTopic(topic.id)"
+>
+  <p class="text-gray-600 text-xs font-semibold">
+    {{ topic.isA.toUpperCase() }}
+  </p>
+  <h2 class="text-lg">{{ topic.name }}</h2>
+  <p class="text-md text-gray-600" *ngIf="topic.sdesc.length > 0">
+    {{ topic.sdesc }}
+  </p>
+</div>

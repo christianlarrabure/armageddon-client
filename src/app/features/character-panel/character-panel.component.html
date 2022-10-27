@@ -1,5 +1,5 @@
 <div class="h-full w-full flex flex-col justify-end bg-gray-800 p-2 pb-4">
-<!--   <p>{{ character.longDescriptionStatus }}</p>
+  <!--   <p>{{ character.longDescriptionStatus }}</p>
   <p>{{ character.longDescription }}</p>
   <p>{{ character.visibility }}</p>
   <p>{{ character.flying }}</p>
@@ -12,16 +12,21 @@
   <p>{{ character.drunk }}</p>
   <p>{{ character.combatQuit }}</p>
 
- -->  <h1 class="text-xl text-white">{{ character.name }}</h1>
-  <div>
-    <button (click)="openCharacters()"><ng-icon name="matGroup"></ng-icon> Character Notes</button>
+ -->
+  <h1 class="text-xl text-white">{{ character.name }}</h1>
+  <div
+    class="text-xs flex items-center gap-1"
+    [ngClass]="{
+      'text-red-500': character.armed == 'armed',
+      'text-gray-500': character.armed !== 'armed'
+    }"
+    *ngIf="character.armed !== ''"
+  >
+    <ng-icon name="jamSwordF" *ngIf="character.armed == 'armed'"></ng-icon>
+    <ng-icon name="matFrontHand" *ngIf="character.armed == 'unarmed'"></ng-icon>
+    <p>{{ character.armed }}</p>
   </div>
-  <div class="text-xs flex items-center gap-1" [ngClass]="{'text-red-500':character.armed=='armed', 'text-gray-500':character.armed!=='armed'}" *ngIf="character.armed !== ''">
-  <ng-icon name="jamSwordF" *ngIf="character.armed=='armed'"></ng-icon>
-  <ng-icon name="matFrontHand" *ngIf="character.armed=='unarmed'"></ng-icon>
-  <p>{{character.armed}}</p>
-</div>
-<div class="flex text-white text-xs items-center gap-1">
+  <div class="flex text-white text-xs items-center gap-1">
     <ng-icon
       name="matNightlight"
       *ngIf="
@@ -42,7 +47,7 @@
       name="matWbTwilight"
       *ngIf="character.time == 'dawn' || character.time == 'dusk'"
     ></ng-icon>
-    <p>{{ character.time }} on {{character.day}}</p>
+    <p>{{ character.time }} on {{ character.day }}</p>
   </div>
   <div class="flex text-white text-xs items-center gap-1">
     <ng-icon name="matBoy" *ngIf="character.position == 'standing'"></ng-icon>
@@ -54,16 +59,16 @@
     <p>{{ character.verbosePosition }}</p>
   </div>
   <div class="flex text-white text-xs items-center gap-1">
-    <ng-icon
-      name="matTranslate"
-      *ngIf="character.accent"
-    ></ng-icon>
-    <p *ngIf="character.accent">{{ character.accent }}-accented {{character.language}}</p>
+    <ng-icon name="matTranslate" *ngIf="character.accent"></ng-icon>
+    <p *ngIf="character.accent">
+      {{ character.accent }}-accented {{ character.language }}
+    </p>
   </div>
-  <div class="flex text-white text-xs items-center gap-1" *ngIf="character.encumberance">
-    <ng-icon
-      name="heroScaleSolid"
-    ></ng-icon>
+  <div
+    class="flex text-white text-xs items-center gap-1"
+    *ngIf="character.encumberance"
+  >
+    <ng-icon name="heroScaleSolid"></ng-icon>
     <p>{{ character.encumberance }}</p>
   </div>
   <app-attribute-progress-bar
@@ -110,4 +115,9 @@
     [maxValue]="getThirstMaxValue()"
     [valueLabel]="character.thirst"
   ></app-attribute-progress-bar>
+  <app-smart-search
+    class="mt-4"
+    (showChanged)="smartSearchChanged($event)"
+    (pickedTopic)="topicSelected($event)"
+  ></app-smart-search>
 </div>

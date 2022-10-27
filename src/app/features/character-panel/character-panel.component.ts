@@ -3,6 +3,7 @@ import PlayerCharacter, {
   hungerValues,
 } from 'src/app/models/playerCharacter.model';
 import { TelnetService } from '../telnet.service';
+import { SmartSearchComponent } from '../../shared/smart-search/smart-search.component';
 
 @Component({
   selector: 'app-character-panel',
@@ -47,6 +48,10 @@ export class CharacterPanelComponent implements OnInit {
   };
 
   @Output() clickOn = new EventEmitter<string>();
+
+  @Output() dialogOpen = new EventEmitter<boolean>();
+
+  @Output() viewTopic = new EventEmitter<number | undefined>();
 
   constructor(private telnet: TelnetService, private zone: NgZone) {}
 
@@ -112,8 +117,16 @@ export class CharacterPanelComponent implements OnInit {
   getThirstMaxValue() {
     return 6;
   }
-  
+
   openCharacters() {
     this.clickOn.emit('characters');
+  }
+
+  smartSearchChanged(value: boolean) {
+    this.dialogOpen.emit(value);
+  }
+
+  topicSelected(id: number | undefined) {
+    this.viewTopic.emit(id);
   }
 }

@@ -14,10 +14,11 @@
   </button>
 </div>
 <quill-editor [(ngModel)]="topic.content"></quill-editor>
-<div class="flex m-2">
-  <app-checkbox [(value)]="topic.isCharacter" label="Character"></app-checkbox>
-</div>
-<div class="flex items-center gap-2" *ngIf="topic.isCharacter === true">
+<div class="flex items-center gap-2">
   <p class="font-semibold">Sdesc</p>
-  <input type="text" [(ngModel)]="topic.sdesc" class="border border-black p-1 rounded w-2/3">
+  <input
+    type="text"
+    [(ngModel)]="topic.sdesc"
+    class="border border-black p-1 rounded w-2/3"
+  />
 </div>

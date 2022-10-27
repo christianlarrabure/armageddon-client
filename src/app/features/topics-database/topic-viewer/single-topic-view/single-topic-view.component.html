@@ -15,14 +15,4 @@
       </button>
     </div>
   </div>
-  <div>
-    <div class="float-right border p-2 text-xs flex flex-col items-center gap-2" *ngIf="topic.isCharacter">
-      <h2 class="font-semibold">Character</h2>
-      <div class="grid grid-cols-2 justify-center gap-4">
-        <p class="font-semibold text-end">Sdesc</p>
-        <p class="text-start">{{topic.sdesc}}</p>
-      </div>
-    </div>
-    <p [innerHtml]="topic.content"></p>  
-  </div>
 </main>

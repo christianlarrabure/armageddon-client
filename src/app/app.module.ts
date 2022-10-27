@@ -21,17 +21,20 @@ import {
   matTranslate,
   matFrontHand,
   matGroup,
-  matFullscreenExit
+  matFullscreenExit,
 } from '@ng-icons/material-icons/baseline';
 import { CharacterPanelComponent } from './features/character-panel/character-panel.component';
 import { AttributeProgressBarComponent } from './features/character-panel/attribute-progress-bar/attribute-progress-bar.component';
 import { CharactersDialogComponent } from './features/characters-dialog/characters-dialog.component';
 import { TopicsDatabaseComponent } from './features/topics-database/topics-database.component';
-import { TopicEditorComponent } from './features/topics-database/topic-editor/topic-editor.component';
 import { TopicViewerComponent } from './features/topics-database/topic-viewer/topic-viewer.component';
 import { SingleTopicViewComponent } from './features/topics-database/topic-viewer/single-topic-view/single-topic-view.component';
 import { QuillModule } from 'ngx-quill';
 import { CheckboxComponent } from './features/input/checkbox/checkbox.component';
+import { ArmageddonModule } from './armageddon/armageddon.module';
+import { SharedModule } from './shared/shared.module';
+import { TopicViewModule } from './features/topic-view/topic-view.module';
+import { TopicEditorModule } from './features/topic-editor/topic-editor.module';
 
 @NgModule({
   declarations: [
@@ -43,12 +46,15 @@ import { CheckboxComponent } from './features/input/checkbox/checkbox.component'
     AttributeProgressBarComponent,
     CharactersDialogComponent,
     TopicsDatabaseComponent,
-    TopicEditorComponent,
     TopicViewerComponent,
     SingleTopicViewComponent,
     CheckboxComponent,
   ],
   imports: [
+    ArmageddonModule,
+    SharedModule,
+    TopicViewModule,
+    TopicEditorModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -66,9 +72,9 @@ import { CheckboxComponent } from './features/input/checkbox/checkbox.component'
       matFrontHand,
       heroScaleSolid,
       matGroup,
-      matFullscreenExit
+      matFullscreenExit,
     }),
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

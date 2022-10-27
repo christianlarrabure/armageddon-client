@@ -16,10 +16,5 @@
       [topics]="topics"
       (selectedTopic)="selectTopic($event)"
     ></app-topic-viewer>
-    <app-topic-editor
-      *ngIf="screen == 'editor'"
-      [selectedTopic]="selectedTopicId"
-      (done)="screen = 'list'"
-    ></app-topic-editor>
   </div>
 </div>

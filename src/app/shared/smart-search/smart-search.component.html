@@ -1,0 +1,23 @@
+<button
+  class="px-2 py-1 bg-gray-300 rounded text-gray-500 w-full hover:bg-white hover:text-gray-800 transition text-left"
+  (click)="changeShow(true)"
+>
+  Search
+</button>
+<app-blurred-background [show]="show">
+  <app-card class="w-full h-full p-4" (close)="changeShow(false)">
+    <div class="p-2">
+      <input
+        type="text"
+        class="border rounded p-1 w-full bg-gray-300 focus:bg-white text-gray-500 focus:text-black transition text-md"
+        placeholder="Enter a search term here..."
+        (input)="handleSearch()"
+        [(ngModel)]="searchValue"
+      />
+      <app-smart-search-found-topics
+        [topics]="foundTopics"
+        (pickTopic)="pickTopic($event)"
+      ></app-smart-search-found-topics>
+    </div>
+  </app-card>
+</app-blurred-background>
