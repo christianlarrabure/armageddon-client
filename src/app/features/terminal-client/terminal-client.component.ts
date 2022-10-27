@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { TelnetService } from '../telnet.service';
 import { NgTerminal } from 'ng-terminal';
+import { ArmageddonService } from '../../armageddon/armageddon.service';
 
 @Component({
   selector: 'app-terminal-client',
@@ -18,31 +19,31 @@ import { NgTerminal } from 'ng-terminal';
 export class TerminalClientComponent implements OnInit, AfterViewInit {
   @ViewChild('term', { static: false }) term!: NgTerminal;
 
-  constructor(private telnet: TelnetService, private zone: NgZone) {}
+  constructor(
+    private telnet: TelnetService,
+    private armageddon: ArmageddonService
+  ) {}
 
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
+    this.armageddon.messages.subscribe((message) => {
+      console.log(message);
+      this.term.write(message);
+    });
+
     this.term.setXtermOptions({
       theme: {
         background: '#111827',
         cursor: '#111827',
       },
       minimumContrastRatio: 7,
-      disableStdin: true,
     });
     this.term.onData().subscribe((input) => {
       console.log(input);
     });
 
-    this.telnet.on(
-      'message',
-      (event: Electron.IpcMessageEvent, message: string) => {
-        this.zone.run(() => {
-          this.term.write(message);
-        });
-      }
-    );
+    this.term.setDraggable;
 
     this.telnet.send('init');
   }

@@ -1,0 +1,19 @@
+<div class="w-full">
+  <p class="text-white text-xs">{{ attribute }} (<span *ngIf="valueLabel !== ''">{{ valueLabel }}</span><span *ngIf="valueLabel === ''">{{ value }}/{{ maxValue }}</span>)</p>
+  <div class="w-full bg-gray-900 rounded-full h-1.5">
+    <div
+      class="h-1.5 rounded-full transition"
+      [ngClass]="{
+        'bg-red-500':
+          color == 'red' || (color == 'hunger' && value <= 3) || color == 'thirst' && value < 3,
+        'bg-cyan-500': color == 'cyan',
+        'bg-blue-500': color == 'blue',
+        'bg-slate-500': color == 'gray',
+        'bg-green-500':
+          color == 'green' ||
+          (color == 'hunger' && value >= 6) || (color == 'thirst' && value == 6),
+          'bg-orange-500': color == 'hunger' && value > 3 && value <= 6 || color == 'thirst' && value < 6 && value >= 3}"
+      [ngStyle]="{ width: getWidthString() }"
+    ></div>
+  </div>
+</div>

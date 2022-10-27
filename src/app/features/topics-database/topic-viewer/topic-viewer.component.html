@@ -1,0 +1,26 @@
+<div class="flex w-full h-full">
+  <div class="bg-gray-900 h-full p-4">
+    <div class="flex">
+      <input
+        type="text"
+        [(ngModel)]="searchInput"
+        class="bg-gray-800 px-2 py-1 rounded text-white w-60"
+        placeholder="Search topics..."
+      />
+    </div>
+    <div>
+        <p *ngFor="let mtopic of matchTopics()" class="hover:underline text-white" (click)="viewTopic(mtopic)">{{mtopic.name}}</p>
+    </div>
+    <button class="text-white hover:underline" (click)="openTopic(undefined)">Add new</button>
+  </div>
+  <div class="bg-white h-full grow p-4">
+    <div *ngIf="viewingTopic === undefined">
+        <h1 class="text-xl">No topic selected.</h1>
+    </div>
+    <div *ngIf="viewingTopic !== undefined">
+      <app-single-topic-view [topic]="viewingTopic" (editTopic)="editTopic($event)">
+        
+      </app-single-topic-view>
+    </div>
+  </div>
+</div>
