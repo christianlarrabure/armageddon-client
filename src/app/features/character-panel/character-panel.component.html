@@ -64,6 +64,12 @@
       {{ character.accent }}-accented {{ character.language }}
     </p>
   </div>
+  <div class="flex text-white text-xs items-center gap-1">
+    <ng-icon name="matLocationOn"></ng-icon>
+    <p>
+      {{ (roomName$ | async) ?? "Unknown Location" }}
+    </p>
+  </div>
   <div
     class="flex text-white text-xs items-center gap-1"
     *ngIf="character.encumberance"

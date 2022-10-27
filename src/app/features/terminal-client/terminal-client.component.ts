@@ -28,7 +28,6 @@ export class TerminalClientComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.armageddon.messages.subscribe((message) => {
-      console.log(message);
       this.term.write(message);
     });
 
