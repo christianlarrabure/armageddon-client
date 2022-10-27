@@ -4,6 +4,7 @@ import PlayerCharacter, {
 } from 'src/app/models/playerCharacter.model';
 import { TelnetService } from '../telnet.service';
 import { SmartSearchComponent } from '../../shared/smart-search/smart-search.component';
+import { ArmageddonService } from '../../armageddon/armageddon.service';
 
 @Component({
   selector: 'app-character-panel',
@@ -53,7 +54,13 @@ export class CharacterPanelComponent implements OnInit {
 
   @Output() viewTopic = new EventEmitter<number | undefined>();
 
-  constructor(private telnet: TelnetService, private zone: NgZone) {}
+  constructor(
+    private telnet: TelnetService,
+    private zone: NgZone,
+    private armageddon: ArmageddonService
+  ) {}
+
+  roomName$ = this.armageddon.roomNames$;
 
   ngOnInit(): void {
     this.telnet.on(

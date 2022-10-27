@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IpcRenderer } from 'electron';
-import { Observable, Subject, Subscriber } from 'rxjs';
+import { Observable, Subject, filter, map } from 'rxjs';
+import StripAnsi from 'strip-ansi';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,41 @@ export class ArmageddonService {
   private _ipc: IpcRenderer = window.require('electron').ipcRenderer;
   public messages: Subject<string> = new Subject();
   public rawMessages: Subject<string> = new Subject();
+  public cleanMessages$ = this.messages
+    .asObservable()
+    .pipe(map((value) => StripAnsi(value)));
+
+  private locationRegExp: RegExp = /(.+) \[(.+)\]/g;
+
+  public locationStrings$ = this.cleanMessages$.pipe(
+    filter((value) => {
+      const result = this.locationRegExp.exec(value);
+      return result !== null;
+    })
+  );
+
+  public roomNames$ = this.locationStrings$.pipe(
+    map((value) => {
+      const captureRegExp = /(.+) \[(.+)\]/g;
+      const result = captureRegExp.exec(value);
+      if (result !== null) {
+        return result[1];
+      }
+      return 'Unknown';
+    })
+  );
+
+  public roomExits$ = this.locationStrings$.pipe(
+    map((value) => {
+      const captureRegExp = /(.+) \[(.+)\]/g;
+      const result = captureRegExp.exec(value);
+      if (result !== null) {
+        return result[2].split('');
+      }
+      return [];
+    })
+  );
+
   private cachedMessage: string = '';
 
   sendCachedMessage() {
@@ -31,10 +67,14 @@ export class ArmageddonService {
       }
     });
     this._ipc.on('message', (event: any, message: string) => {
-      const msgs = message.split('\r');
+      const msgs = message.split('\n');
       for (let i = 0; i < msgs.length; i++) {
         const msg = msgs[i].replace('\r', '');
-        this.rawMessages.next(`${msg}`);
+        let token = '';
+        if (i < msgs.length && msgs.length !== 1) {
+          token = '\r\n';
+        }
+        this.rawMessages.next(`${msg}${token}`);
       }
     });
   }

@@ -22,6 +22,7 @@ import {
   matFrontHand,
   matGroup,
   matFullscreenExit,
+  matLocationOn,
 } from '@ng-icons/material-icons/baseline';
 import { CharacterPanelComponent } from './features/character-panel/character-panel.component';
 import { AttributeProgressBarComponent } from './features/character-panel/attribute-progress-bar/attribute-progress-bar.component';
@@ -73,6 +74,7 @@ import { TopicEditorModule } from './features/topic-editor/topic-editor.module';
       heroScaleSolid,
       matGroup,
       matFullscreenExit,
+      matLocationOn,
     }),
     QuillModule.forRoot(),
   ],
