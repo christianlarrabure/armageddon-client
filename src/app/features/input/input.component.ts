@@ -7,22 +7,24 @@ import { TelnetService } from '../telnet.service';
 })
 export class InputComponent implements OnInit {
   input: string = '';
-  history:string[]=[];
-  historyPosition:number=0;
+  history: string[] = [];
+  historyPosition:number = 0;
 
   constructor(private telnet: TelnetService) {}
 
   ngOnInit(): void {}
 
-  submitInput() {
+  submitInput(event: Event) {
     this.telnet.send('sendInput', this.input);
     this.history.push(this.input);
     console.log(this.input);
-    this.input = '';
+    if (event.target) {
+      (event.target as HTMLInputElement).select();
+    }
     this.historyPosition = this.history.length;
   }
 
-  keydownEnter(event: any) {
+  keydownEnter(event: Event) {
     event.preventDefault();
   }
 

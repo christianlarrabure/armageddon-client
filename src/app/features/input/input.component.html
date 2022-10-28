@@ -3,7 +3,7 @@
     type="text"
     class="w-full h-full bg-gray-800 text-white rounded focus:ring-0 focus:border-transparent border-transparent"
     [(ngModel)]="input"
-    (keyup.enter)="submitInput()"
+    (keyup.enter)="submitInput($event)"
     (keydown.enter)="keydownEnter($event)"
     (keyup.arrowup)="historyUp()"
     (keyup.arrowdown)="historyDown()"
