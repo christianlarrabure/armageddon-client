@@ -58,13 +58,12 @@ export class ArmageddonService {
   constructor() {
     this.rawMessages.subscribe((message) => {
       this.cachedMessage = this.cachedMessage + message;
-      console.log('Gauging ', JSON.stringify(this.cachedMessage));
       if (this.cachedMessage.search('\n') !== -1) {
         this.sendCachedMessage();
       } else {
         setTimeout(() => {
           this.sendCachedMessage();
-        }, 500);
+        }, 300);
       }
     });
     this._ipc.on('message', (event: any, message: string) => {

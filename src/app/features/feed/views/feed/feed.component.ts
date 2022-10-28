@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TopicsService } from '../../../../topics/topics.service';
 import Topic from '../../../../models/topic.model';
 
@@ -6,14 +6,13 @@ import Topic from '../../../../models/topic.model';
   selector: 'app-feed',
   templateUrl: './feed.component.html',
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit, AfterViewInit {
   constructor(private topicsService: TopicsService) {}
 
   public topics$ = this.topicsService.topicsMentioned$;
   savedTopics: Topic[] = [];
 
   ngOnInit(): void {
-    this.topicsService.refreshTopics();
     this.topics$.subscribe((topics) => {
       topics.forEach((topic) => {
         const idx = this.savedTopics.indexOf(topic);
@@ -22,6 +21,10 @@ export class FeedComponent implements OnInit {
         }
       });
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.topicsService.refreshTopics();
   }
 
   clearItem(topic: Topic) {
