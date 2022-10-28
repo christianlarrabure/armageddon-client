@@ -16,7 +16,8 @@ export class FeedComponent implements OnInit {
     this.topicsService.refreshTopics();
     this.topics$.subscribe((topics) => {
       topics.forEach((topic) => {
-        if (!this.savedTopics.includes(topic)) {
+        const idx = this.savedTopics.indexOf(topic);
+        if (idx == -1) {
           this.savedTopics.unshift(topic);
         }
       });
