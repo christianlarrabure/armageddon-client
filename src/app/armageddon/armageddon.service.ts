@@ -63,7 +63,7 @@ export class ArmageddonService {
       } else {
         setTimeout(() => {
           this.sendCachedMessage();
-        }, 500);
+        }, 300);
       }
     });
     this._ipc.on('message', (event: any, message: string) => {
@@ -71,7 +71,7 @@ export class ArmageddonService {
       for (let i = 0; i < msgs.length; i++) {
         const msg = msgs[i].replace('\r', '');
         let token = '';
-        if (i < msgs.length && msgs.length !== 1) {
+        if (i + 1 < msgs.length && msgs.length !== 1) {
           token = '\r\n';
         }
         this.rawMessages.next(`${msg}${token}`);
