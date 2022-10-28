@@ -58,6 +58,7 @@ export class ArmageddonService {
   constructor() {
     this.rawMessages.subscribe((message) => {
       this.cachedMessage = this.cachedMessage + message;
+      console.log('Gauging ', JSON.stringify(this.cachedMessage));
       if (this.cachedMessage.search('\n') !== -1) {
         this.sendCachedMessage();
       } else {
@@ -71,7 +72,7 @@ export class ArmageddonService {
       for (let i = 0; i < msgs.length; i++) {
         const msg = msgs[i].replace('\r', '');
         let token = '';
-        if (i < msgs.length && msgs.length !== 1) {
+        if (i + 1 < msgs.length && msgs.length !== 1) {
           token = '\r\n';
         }
         this.rawMessages.next(`${msg}${token}`);
