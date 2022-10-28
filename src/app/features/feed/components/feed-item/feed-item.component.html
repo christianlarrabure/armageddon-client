@@ -1,0 +1,16 @@
+<div class="w-full p-2 bg-white rounded text-sm">
+  <div class="flex w-full justify-between">
+    <p class="text-blue-500">{{ topic?.name }}</p>
+    <button (click)="clearItem()">
+      <ng-icon name="matDoDisturb"></ng-icon>
+    </button>
+  </div>
+  <p class="text-gray-500">
+    {{ topic?.sdesc }}
+  </p>
+  <p
+    [innerHTML]="topic?.content"
+    *ngIf="(topic?.content ?? '').length > 0"
+    class="border-t border-t-gray-500"
+  ></p>
+</div>

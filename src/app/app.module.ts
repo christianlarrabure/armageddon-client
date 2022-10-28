@@ -36,6 +36,7 @@ import { ArmageddonModule } from './armageddon/armageddon.module';
 import { SharedModule } from './shared/shared.module';
 import { TopicViewModule } from './features/topic-view/topic-view.module';
 import { TopicEditorModule } from './features/topic-editor/topic-editor.module';
+import { FeedModule } from './features/feed/feed.module';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { TopicEditorModule } from './features/topic-editor/topic-editor.module';
     ArmageddonModule,
     SharedModule,
     TopicViewModule,
+    FeedModule,
     TopicEditorModule,
     BrowserModule,
     AppRoutingModule,
