@@ -1,9 +1,6 @@
 import { Component, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
-import PlayerCharacter, {
-  hungerValues,
-} from 'src/app/models/playerCharacter.model';
+import PlayerCharacter from 'src/app/models/playerCharacter.model';
 import { TelnetService } from '../telnet.service';
-import { SmartSearchComponent } from '../../shared/smart-search/smart-search.component';
 import { ArmageddonService } from '../../armageddon/armageddon.service';
 import { MirageService } from '../mirage/services/mirage.service';
 
@@ -71,7 +68,7 @@ export class CharacterPanelComponent implements OnInit {
 
     this.telnet.on(
       'prompt',
-      (event: Electron.IpcMessageEvent, loadedCharacter: PlayerCharacter) => {
+      (_event: Electron.IpcMessageEvent, loadedCharacter: PlayerCharacter) => {
         this.zone.run(() => {
           this.character = loadedCharacter;
         });
