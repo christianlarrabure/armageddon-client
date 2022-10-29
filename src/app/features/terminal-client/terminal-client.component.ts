@@ -43,7 +43,5 @@ export class TerminalClientComponent implements OnInit, AfterViewInit {
     });
 
     this.term.setDraggable;
-
-    this.telnet.send('init');
   }
 }

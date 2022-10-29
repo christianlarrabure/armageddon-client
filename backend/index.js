@@ -24,11 +24,6 @@ function connectToMUD(client) {
 function connect(client) {
   moo = connectToMUD(client);
 
-  ipcMain.on("moo-connect", () => {
-    if (moo) moo.destroy();
-    moo = connectToMUD(client);
-  });
-
   moo.setKeepAlive(true, 120000);
 
   moo.on("data", (data) => {
@@ -58,8 +53,14 @@ function connect(client) {
 }
 
 function init(event) {
-  console.trace("Init raised");
   connect(event.sender);
+
+  ipcMain.on("moo-connect", () => {
+    console.log("Reconnecting.");
+    if (moo) moo.destroy();
+    connect(event.sender);
+  });
+
   topicRoutes.init();
 }
 

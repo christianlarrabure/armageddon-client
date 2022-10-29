@@ -1,38 +1,45 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit, AfterViewInit } from '@angular/core';
 import { ArmageddonService } from './armageddon/armageddon.service';
 import { EConnectionStatus } from './armageddon/interfaces/connectionStatus.interface';
+import { TelnetService } from './features/telnet.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   constructor(
     private ngZone: NgZone,
     private armageddon: ArmageddonService,
+    private telnet: TelnetService
   ) {}
 
   ngOnInit(): void {
-    this.armageddon.armageddonConnection$.subscribe(
-      (connectionStatus) => {
-        this.ngZone.run(() => {
-          switch (connectionStatus) {
-            case EConnectionStatus.RECONNECTING:
-              break;
-            case EConnectionStatus.CONNECTED:
-              this.appView = AppView.APP;
-              break;
-            case EConnectionStatus.DISCONNECTED:
-              this.appView = AppView.RECONNECT;
-              break;
-            default:
-              console.debug('AppComponent received unrecognized ConnectionStatus: ' + connectionStatus);
-              break;
-          }
-        });
-      }
-    );
+    this.armageddon.armageddonConnection$.subscribe((connectionStatus) => {
+      this.ngZone.run(() => {
+        switch (connectionStatus) {
+          case EConnectionStatus.RECONNECTING:
+            break;
+          case EConnectionStatus.CONNECTED:
+            this.appView = AppView.APP;
+            break;
+          case EConnectionStatus.DISCONNECTED:
+            this.appView = AppView.RECONNECT;
+            break;
+          default:
+            console.debug(
+              'AppComponent received unrecognized ConnectionStatus: ' +
+                connectionStatus
+            );
+            break;
+        }
+      });
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.telnet.send('init');
   }
 
   title = 'client';
