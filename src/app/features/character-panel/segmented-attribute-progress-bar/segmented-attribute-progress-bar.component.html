@@ -1,0 +1,55 @@
+<div class="w-full mt-2">
+  <p class="text-slate-200 text-sm">{{ attribute }} <span *ngIf="valueLabel !== ''">({{ valueLabel }})</span></p>
+  <div class="flex flow">
+    <div
+      class="w-1/5 rounded h-4 mt-1"
+      [ngClass]="{
+        'bg-slate-900': value < 1,
+        'bg-red-600': value == 1,
+        'bg-orange-600': value == 2,
+        'bg-yellow-600': value == 3,
+        'bg-amber-600': value == 4,
+        'bg-teal-600': attribute == 'Hunger' && value >= 5,
+        'bg-cyan-600': attribute == 'Thirst' && value >= 5
+      }"
+    ></div>
+    <div
+    class="w-1/5 rounded h-4 mt-1"
+    [ngClass]="{
+      'bg-slate-900': value < 2,
+      'bg-orange-600': value == 2,
+      'bg-yellow-600': value == 3,
+      'bg-amber-600': value == 4,
+      'bg-teal-600': attribute == 'Hunger' && value >= 5,
+      'bg-cyan-600': attribute == 'Thirst' && value >= 5
+    }"
+    ></div>
+    <div
+    class="w-1/5 rounded h-4 mt-1"
+    [ngClass]="{
+      'bg-slate-900': value < 3,
+      'bg-yellow-600': value == 3,
+      'bg-amber-600': value == 4,
+      'bg-teal-600': attribute == 'Hunger' && value >= 5,
+      'bg-cyan-600': attribute == 'Thirst' && value >= 5
+    }"
+    ></div>
+    <div
+    class="w-1/5 rounded h-4 mt-1"
+    [ngClass]="{
+      'bg-slate-900': value < 4,
+      'bg-amber-600': value == 4,
+      'bg-teal-600': attribute == 'Hunger' && value >= 5,
+      'bg-cyan-600': attribute == 'Thirst' && value >= 5
+    }"
+    ></div>
+    <div
+    class="w-1/5 rounded h-4 mt-1"
+    [ngClass]="{
+      'bg-slate-900': value < 5,
+      'bg-teal-600': attribute == 'Hunger' && value >= 5,
+      'bg-cyan-600': attribute == 'Thirst' && value >= 5
+    }"
+    ></div>
+  </div>
+</div>

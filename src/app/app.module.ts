@@ -35,6 +35,7 @@ import { ArmageddonModule } from './armageddon/armageddon.module';
 import { SharedModule } from './shared/shared.module';
 import { TopicViewModule } from './features/topic-view/topic-view.module';
 import { TopicEditorModule } from './features/topic-editor/topic-editor.module';
+import { SegmentedAttributeProgressBarComponent } from './features/character-panel/segmented-attribute-progress-bar/segmented-attribute-progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { TopicEditorModule } from './features/topic-editor/topic-editor.module';
     TopicViewerComponent,
     SingleTopicViewComponent,
     CheckboxComponent,
+    SegmentedAttributeProgressBarComponent,
   ],
   imports: [
     ArmageddonModule,

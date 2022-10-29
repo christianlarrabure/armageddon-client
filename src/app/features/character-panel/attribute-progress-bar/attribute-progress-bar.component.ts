@@ -9,7 +9,15 @@ export class AttributeProgressBarComponent implements OnInit {
   @Input() attribute:string="";
   @Input() value:number=0;
   @Input() maxValue:number=0;
-  @Input() color:'red'|'cyan'|'blue'|'gray'|'green'|'hunger'|'thirst'="red";
+  @Input() color:
+    'red' |
+    'violet' |
+    'cyan' |
+    'blue' |
+    'gray' |
+    'green' |
+    'emerald' |
+    'hunger' | 'thirst' = "red";
   @Input() valueLabel:string="";
 
   constructor() { }
