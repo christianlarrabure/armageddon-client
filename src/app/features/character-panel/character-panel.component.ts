@@ -61,6 +61,8 @@ export class CharacterPanelComponent implements OnInit {
 
   roomName$ = this.armageddon.roomNames$;
 
+  characterData$ = this.armageddon.characterData$;
+
   ngOnInit(): void {
     this.mirageService.mirageData$.subscribe(
       ({ character: mirageCharacter }) => {
@@ -69,7 +71,9 @@ export class CharacterPanelComponent implements OnInit {
     );
 
     this.armageddon.characterData$.subscribe((data) => {
-      this.character = data;
+      this.zone.run(() => {
+        this.character = data;
+      });
     });
   }
 
