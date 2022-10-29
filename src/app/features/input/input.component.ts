@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MirageService } from '../mirage/services/mirage.service';
 import { TelnetService } from '../telnet.service';
 
 @Component({
@@ -10,18 +11,30 @@ export class InputComponent implements OnInit {
   history: string[] = [];
   historyPosition:number = 0;
 
-  constructor(private telnet: TelnetService) {}
+  constructor(private telnet: TelnetService, private mirageService: MirageService) {}
 
   ngOnInit(): void {}
 
   submitInput(event: Event) {
-    this.telnet.send('sendInput', this.input);
     this.history.push(this.input);
+    this.historyPosition = this.history.length;
     console.log(this.input);
     if (event.target) {
       (event.target as HTMLInputElement).select();
     }
-    this.historyPosition = this.history.length;
+
+    if (this.input.startsWith("_mirage")) {
+      let arg = this.input.split(" ")[1];
+
+      if (arg in this.mirageService.data.storedCharacters) {
+        this.mirageService.data.character = this.mirageService.data.storedCharacters[arg];
+        this.mirageService.mirage$.next();
+      }
+
+      return;
+    }
+
+    this.telnet.send('sendInput', this.input);
   }
 
   keydownEnter(event: Event) {

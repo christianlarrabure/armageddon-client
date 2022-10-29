@@ -38,6 +38,7 @@ import { TopicViewModule } from './features/topic-view/topic-view.module';
 import { TopicEditorModule } from './features/topic-editor/topic-editor.module';
 import { SegmentedAttributeProgressBarComponent } from './features/character-panel/segmented-attribute-progress-bar/segmented-attribute-progress-bar.component';
 import { FeedModule } from './features/feed/feed.module';
+import { MirageModule } from './features/mirage/mirage.module';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { FeedModule } from './features/feed/feed.module';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    MirageModule,
     NgTerminalModule,
     NgIconsModule.withIcons({
       heroUserSolid,

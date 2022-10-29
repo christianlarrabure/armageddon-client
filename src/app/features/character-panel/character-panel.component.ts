@@ -5,6 +5,7 @@ import PlayerCharacter, {
 import { TelnetService } from '../telnet.service';
 import { SmartSearchComponent } from '../../shared/smart-search/smart-search.component';
 import { ArmageddonService } from '../../armageddon/armageddon.service';
+import { MirageService } from '../mirage/services/mirage.service';
 
 @Component({
   selector: 'app-character-panel',
@@ -57,12 +58,17 @@ export class CharacterPanelComponent implements OnInit {
   constructor(
     private telnet: TelnetService,
     private zone: NgZone,
-    private armageddon: ArmageddonService
+    private armageddon: ArmageddonService,
+    private mirageService: MirageService
   ) {}
 
   roomName$ = this.armageddon.roomNames$;
 
   ngOnInit(): void {
+    this.mirageService.mirageData$.subscribe(({ character: mirageCharacter })=>{
+      this.character = mirageCharacter;
+    });
+
     this.telnet.on(
       'prompt',
       (event: Electron.IpcMessageEvent, loadedCharacter: PlayerCharacter) => {
