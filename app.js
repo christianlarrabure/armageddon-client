@@ -14,6 +14,7 @@ sequelize
       function createWindow() {
         mainWindow = new BrowserWindow({
           show: false,
+          title: "Armageddon Client v.0.1",
           webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { IpcRenderer } from 'electron';
-import { Subject, filter, map } from 'rxjs';
+import { BehaviorSubject, Subject, filter, map } from 'rxjs';
 import StripAnsi from 'strip-ansi';
 import PlayerCharacter from '../models/playerCharacter.model';
+import { EConnectionStatus } from './interfaces/connectionStatus.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -143,6 +144,16 @@ export class ArmageddonService {
     })
   );
 
+  /* CONNECTION STATUS */
+
+  armageddonConnection$ = new BehaviorSubject<EConnectionStatus>(
+    EConnectionStatus.RECONNECTING
+  );
+
+  public reconnect() {
+    this._ipc.emit('moo-connect');
+  }
+
   private cachedMessage: string = '';
 
   sendCachedMessage() {
@@ -173,6 +184,19 @@ export class ArmageddonService {
           token = '\r\n';
         }
         this.rawMessages.next(`${msg}${token}`);
+      }
+    });
+    this._ipc.on('moo-connection-status', (event: any, status: number) => {
+      switch (status) {
+        case 0:
+          this.armageddonConnection$.next(EConnectionStatus.DISCONNECTED);
+          break;
+        case 1:
+          this.armageddonConnection$.next(EConnectionStatus.RECONNECTING);
+          break;
+        case 2:
+          this.armageddonConnection$.next(EConnectionStatus.CONNECTED);
+          break;
       }
     });
   }
