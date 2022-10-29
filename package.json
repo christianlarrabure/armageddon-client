@@ -29,6 +29,7 @@
     "@angular/router": "^14.0.0",
     "@ng-icons/core": "^22.3.0",
     "@ng-icons/heroicons": "^22.3.0",
+    "@ng-icons/ionicons": "^22.4.0",
     "@ng-icons/jam-icons": "^22.3.0",
     "@ng-icons/material-icons": "^22.3.0",
     "@pixi/tilemap": "^3.2.2",
@@ -51,7 +52,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.1",
-    "@angular/cli": "~14.2.1",
+    "@angular/cli": "~14.2.7",
     "@angular/compiler-cli": "^14.0.0",
     "@electron-forge/cli": "^6.0.0-beta.67",
     "@electron-forge/maker-deb": "^6.0.0-beta.67",

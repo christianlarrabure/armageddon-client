@@ -24,6 +24,7 @@ import {
   matFullscreenExit,
   matLocationOn,
 } from '@ng-icons/material-icons/baseline';
+import { ionFootsteps, ionEar, ionEye } from '@ng-icons/ionicons';
 import { CharacterPanelComponent } from './features/character-panel/character-panel.component';
 import { AttributeProgressBarComponent } from './features/character-panel/attribute-progress-bar/attribute-progress-bar.component';
 import { CharactersDialogComponent } from './features/characters-dialog/characters-dialog.component';
@@ -81,6 +82,9 @@ import { MirageModule } from './features/mirage/mirage.module';
       matGroup,
       matFullscreenExit,
       matLocationOn,
+      ionFootsteps,
+      ionEar,
+      ionEye,
     }),
     QuillModule.forRoot(),
   ],

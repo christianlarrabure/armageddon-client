@@ -23,8 +23,8 @@ export class InputComponent implements OnInit {
       (event.target as HTMLInputElement).select();
     }
 
-    if (this.input.startsWith("_mirage")) {
-      let arg = this.input.split(" ")[1];
+    if (this.input.startsWith('_mirage')) {
+      let arg = this.input.split(' ')[1];
 
       if (arg in this.mirageService.data.storedCharacters) {
         this.mirageService.data.character = this.mirageService.data.storedCharacters[arg];
@@ -32,6 +32,15 @@ export class InputComponent implements OnInit {
       }
 
       return;
+    }
+
+    // @TODO: Hook this into a Client-side alias system instead of a straight if clause
+    if (this.input === '_prompt') {
+      this.telnet.send(
+        'sendInput',
+        // @TODO: Move this to a Constants file or utility
+        'prompt %h/%H %m/%M %v/%V %t/%T %x/%X [%l] [%L] [%n] [%i] [%s] [%S] [%f] [%o] [%a] [%k] [%w] [%A] [%O] [%e] [%E] [%d] [%p] [%P] [%c] [%R] [%u] [%U] [%q]'
+      )
     }
 
     this.telnet.send('sendInput', this.input);
