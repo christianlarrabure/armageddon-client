@@ -24,10 +24,10 @@ function connect(client) {
     try {
       data = data.toString();
       console.log([data]);
-      const cleanMsg = isPrompt(data, client);
+      /* const cleanMsg = isPrompt(data, client);
       if (cleanMsg !== null) {
         data = cleanMsg;
-      }
+      } */
       client.send("message", data);
     } catch (e) {
       client.send("error", e);
