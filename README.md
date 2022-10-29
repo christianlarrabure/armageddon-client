@@ -1,27 +1,17 @@
-# Client
+The Unofficial Armageddon Client is a client using ElectronJS, AngularJS and ExpressJS to create the ultimate MUD client for ArmageddonMUD.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
+# Features
 
-## Development server
+- Optimized I/O for ArmageddonMUD.
+- XTERM and ANSI colors.
+- Visual bars to show you vital information about your character (such as health, stun, mana, focus, hunger and thirst).
+- Character side bar that shows you other information about your PC (such as their name, if they are armed, etc).
+- A robust note taking system (topics system) that lets you take notes and record short descriptions for Characters and Objects.
+- A context side menu that detects when an object or character you have written a note about has been mentioned, and shows you a card showing you your notes on them.
+- A character count to let you know when you're getting to a point where ArmageddonMUD might be cutting off your input.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# Installation Instructions
 
-## Code scaffolding
+You can unzip the file appropriate for your OS and extract it in a folder you will remember the location of. Run the executable and it should automatically connect to ArmageddonMUD. Once inside, you should write \_prompt for it to set your prompt and for your visual bars to work.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+It will create a data.sqlite file which is where your data is stored.
