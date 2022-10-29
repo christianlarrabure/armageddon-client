@@ -176,9 +176,9 @@ export class ArmageddonService {
       }
     });
     this._ipc.on('message', (event: any, message: string) => {
-      const msgs = message.split('\n');
+      const msgs = message.replace('\r', '').split('\n');
       for (let i = 0; i < msgs.length; i++) {
-        const msg = msgs[i].replace('\r', '');
+        const msg = msgs[i];
         let token = '';
         if (i + 1 < msgs.length && msgs.length !== 1) {
           token = '\r\n';
