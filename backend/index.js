@@ -5,6 +5,10 @@ const topicRoutes = require("./routes/topics");
 
 let moo;
 function connectToMUD(client) {
+  console.log("ConnectToMUD raised");
+
+  client.send("moo-connection-status", 1); // CONNECTING
+
   return net.connect({ host: "ginka.armageddon.org", port: "4050" }, (err) => {
     if (err) {
       client.send("moo-connection-status", 0); // DISCONNECTED.
@@ -18,11 +22,10 @@ function connectToMUD(client) {
 }
 
 function connect(client) {
-  client.send("moo-connection-status", 1); // CONNECTING
   moo = connectToMUD(client);
 
   ipcMain.on("moo-connect", () => {
-    moo.destroy();
+    if (moo) moo.destroy();
     moo = connectToMUD(client);
   });
 
@@ -55,7 +58,7 @@ function connect(client) {
 }
 
 function init(event) {
-  console.log(event.sender);
+  console.trace("Init raised");
   connect(event.sender);
   topicRoutes.init();
 }

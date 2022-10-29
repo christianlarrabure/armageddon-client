@@ -40,6 +40,7 @@ import { TopicEditorModule } from './features/topic-editor/topic-editor.module';
 import { SegmentedAttributeProgressBarComponent } from './features/character-panel/segmented-attribute-progress-bar/segmented-attribute-progress-bar.component';
 import { FeedModule } from './features/feed/feed.module';
 import { MirageModule } from './features/mirage/mirage.module';
+import { ReconnectViewComponent } from './features/reconnect-view/reconnect-view.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MirageModule } from './features/mirage/mirage.module';
     SingleTopicViewComponent,
     CheckboxComponent,
     SegmentedAttributeProgressBarComponent,
+    ReconnectViewComponent,
   ],
   imports: [
     ArmageddonModule,

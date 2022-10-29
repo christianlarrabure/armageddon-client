@@ -8,7 +8,17 @@
     [active]="showCharacters"
     (viewTopic)="openTopic($event)"
   ></app-topics-database>
-  <div class="flex h-screen w-screen bg-gray-800 overflow-hidden">
+
+  <!-- Reconnect View -->
+  <div
+    *ngIf="showReconnectView()"
+    class="flex justify-center items-center h-screen w-screen bg-gray-800 overflow-hidden"
+  >
+    <app-reconnect-view></app-reconnect-view>
+  </div>
+
+  <!-- Core App View -->
+  <div *ngIf="showAppView()" class="flex h-screen w-screen bg-gray-800 overflow-hidden">
     <app-character-panel
       class="w-1/6"
       (clickOn)="handleClick($event)"

@@ -151,7 +151,7 @@ export class ArmageddonService {
   );
 
   public reconnect() {
-    this._ipc.emit('moo-connect');
+    this._ipc.send('moo-connect');
   }
 
   private cachedMessage: string = '';
@@ -175,7 +175,7 @@ export class ArmageddonService {
         }, 300);
       }
     });
-    this._ipc.on('message', (event: any, message: string) => {
+    this._ipc.on('message', (_event: any, message: string) => {
       const msgs = message.split('\n');
       for (let i = 0; i < msgs.length; i++) {
         const msg = msgs[i].replace('\r', '');
@@ -186,7 +186,7 @@ export class ArmageddonService {
         this.rawMessages.next(`${msg}${token}`);
       }
     });
-    this._ipc.on('moo-connection-status', (event: any, status: number) => {
+    this._ipc.on('moo-connection-status', (_event: any, status: number) => {
       switch (status) {
         case 0:
           this.armageddonConnection$.next(EConnectionStatus.DISCONNECTED);

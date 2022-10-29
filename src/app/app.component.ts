@@ -1,17 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { ArmageddonService } from './armageddon/armageddon.service';
+import { EConnectionStatus } from './armageddon/interfaces/connectionStatus.interface';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(
+    private ngZone: NgZone,
+    private armageddon: ArmageddonService,
+  ) {}
+
+  ngOnInit(): void {
+    this.armageddon.armageddonConnection$.subscribe(
+      (connectionStatus) => {
+        this.ngZone.run(() => {
+          switch (connectionStatus) {
+            case EConnectionStatus.RECONNECTING:
+              break;
+            case EConnectionStatus.CONNECTED:
+              this.appView = AppView.APP;
+              break;
+            case EConnectionStatus.DISCONNECTED:
+              this.appView = AppView.RECONNECT;
+              break;
+            default:
+              console.debug('AppComponent received unrecognized ConnectionStatus: ' + connectionStatus);
+              break;
+          }
+        });
+      }
+    );
+  }
+
   title = 'client';
   showCharacters: boolean = false;
+  appView: AppView = AppView.APP;
 
   dialogOpen: boolean = false;
 
-  openedTopic: number | undefined = undefined;
+  openedTopic: number | undefined;
 
   handleClick(type: string) {
     if (type == 'characters') {
@@ -26,4 +56,18 @@ export class AppComponent {
   openTopic(id: any) {
     console.log('TOPIC TO OPEN: ', id);
   }
+
+  // Helper methods for fetching AppView state
+  showReconnectView() {
+    return this.appView === AppView.RECONNECT;
+  }
+
+  showAppView() {
+    return this.appView === AppView.APP;
+  }
+}
+
+enum AppView {
+  APP,
+  RECONNECT,
 }
