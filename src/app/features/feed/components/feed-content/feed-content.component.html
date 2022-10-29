@@ -1,0 +1,23 @@
+<div class="mt-2">
+  <p
+    class="text-xs text-orange-500 flex gap-2 cursor-pointer items-center"
+    *ngIf="(topic?.content ?? '').length > 0 && !showMore"
+    (click)="showMore = true"
+  >
+    <ng-icon name="matArrowRight"></ng-icon>
+    Show more...
+  </p>
+  <p
+    class="text-xs text-orange-500 flex gap-2 cursor-pointer items-center"
+    *ngIf="(topic?.content ?? '').length > 0 && showMore"
+    (click)="showMore = false"
+  >
+    <ng-icon name="matArrowDropUp"></ng-icon>
+    Collapse...
+  </p>
+  <p
+    [innerHTML]="topic?.content"
+    *ngIf="(topic?.content ?? '').length > 0 && showMore"
+    class="mt-2 text-xs"
+  ></p>
+</div>

@@ -1,30 +1,74 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, filter, combineLatest, map } from 'rxjs';
 import { TelnetService } from '../features/telnet.service';
 import Topic from '../models/topic.model';
+import { ArmageddonService } from '../armageddon/armageddon.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TopicsService {
+  constructor(
+    private telnet: TelnetService,
+    private armageddon: ArmageddonService
+  ) {}
+
   public selectedTopic = new Subject<number | undefined>();
   public editedTopic = new Subject<number | undefined>();
 
-  constructor(private telnet: TelnetService) {}
+  private _topics$ = new Subject<Topic[]>();
+  public topics$ = this._topics$.asObservable();
 
-  getTopics(): Observable<Topic[]> {
-    this.telnet.send('getTopics');
-    console.log('Subscribing to topics.');
-    return new Observable((subscriber) => {
+  public topicsMentioned$ = combineLatest([
+    this.topics$,
+    this.armageddon.cleanMessages$,
+  ]).pipe(
+    map((value) => {
+      const topics: Topic[] = value[0];
+      const msg: string = value[1];
+      const mentions: Topic[] = [];
+      console.log(msg);
+      for (let i = 0; i < topics.length; i++) {
+        const topic = topics[i];
+
+        if (topic.sdesc.length <= 0) {
+          continue;
+        }
+
+        if (msg.toLowerCase().search(topic.sdesc.toLowerCase()) >= 0) {
+          mentions.push(topic);
+        }
+      }
+      return mentions;
+    }),
+    filter((value) => {
+      return value.length > 0;
+    })
+  );
+
+  refreshTopics() {
+    return new Promise((resolve, reject) => {
+      this.telnet.send('getTopics');
+      console.log('Requested topics.');
       this.telnet.on('topics', (event: Electron.IpcMainEvent, topics: any) => {
         const topicsArray: Topic[] = [];
         for (let i = 0; i < topics.length; i++) {
           topicsArray.push(topics[i].dataValues);
         }
-        subscriber.next(topicsArray);
-        subscriber.complete();
+        this._topics$.next(topicsArray);
+        console.log('Topics refreshed.', topicsArray);
+        resolve(true);
       });
     });
+  }
+
+  refreshTopicsLater(delay = 1000) {
+    setTimeout(this.refreshTopics, delay);
+  }
+
+  getTopics(): Observable<Topic[]> {
+    this.refreshTopics();
+    return this.topics$;
   }
 
   private isTopicMatch(topic: Topic, search: string): Boolean {
@@ -76,13 +120,16 @@ export class TopicsService {
 
   createTopic(topic: Topic) {
     this.telnet.send('createTopic', topic);
+    this.refreshTopicsLater();
   }
 
   updateTopic(topic: Topic) {
     this.telnet.send('updateTopic', topic);
+    this.refreshTopicsLater();
   }
 
   deleteTopic(id: number) {
     this.telnet.send('deleteTopic', id);
+    this.refreshTopicsLater();
   }
 }

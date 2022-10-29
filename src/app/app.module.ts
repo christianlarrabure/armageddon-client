@@ -22,6 +22,7 @@ import {
   matFrontHand,
   matGroup,
   matFullscreenExit,
+  matLocationOn,
 } from '@ng-icons/material-icons/baseline';
 import { CharacterPanelComponent } from './features/character-panel/character-panel.component';
 import { AttributeProgressBarComponent } from './features/character-panel/attribute-progress-bar/attribute-progress-bar.component';
@@ -36,6 +37,7 @@ import { SharedModule } from './shared/shared.module';
 import { TopicViewModule } from './features/topic-view/topic-view.module';
 import { TopicEditorModule } from './features/topic-editor/topic-editor.module';
 import { SegmentedAttributeProgressBarComponent } from './features/character-panel/segmented-attribute-progress-bar/segmented-attribute-progress-bar.component';
+import { FeedModule } from './features/feed/feed.module';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { SegmentedAttributeProgressBarComponent } from './features/character-pan
     ArmageddonModule,
     SharedModule,
     TopicViewModule,
+    FeedModule,
     TopicEditorModule,
     BrowserModule,
     AppRoutingModule,
@@ -75,6 +78,7 @@ import { SegmentedAttributeProgressBarComponent } from './features/character-pan
       heroScaleSolid,
       matGroup,
       matFullscreenExit,
+      matLocationOn,
     }),
     QuillModule.forRoot(),
   ],
