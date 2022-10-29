@@ -10,6 +10,13 @@ import { MirageService } from '../mirage/services/mirage.service';
   styleUrls: ['./character-panel.component.css'],
 })
 export class CharacterPanelComponent implements OnInit {
+  constructor(
+    private telnet: TelnetService,
+    private zone: NgZone,
+    private armageddon: ArmageddonService,
+    private mirageService: MirageService
+  ) {}
+
   character: PlayerCharacter = {
     hp: 0,
     maxHp: 0,
@@ -52,28 +59,18 @@ export class CharacterPanelComponent implements OnInit {
 
   @Output() viewTopic = new EventEmitter<number | undefined>();
 
-  constructor(
-    private telnet: TelnetService,
-    private zone: NgZone,
-    private armageddon: ArmageddonService,
-    private mirageService: MirageService
-  ) {}
-
   roomName$ = this.armageddon.roomNames$;
 
   ngOnInit(): void {
-    this.mirageService.mirageData$.subscribe(({ character: mirageCharacter })=>{
-      this.character = mirageCharacter;
-    });
-
-    this.telnet.on(
-      'prompt',
-      (_event: Electron.IpcMessageEvent, loadedCharacter: PlayerCharacter) => {
-        this.zone.run(() => {
-          this.character = loadedCharacter;
-        });
+    this.mirageService.mirageData$.subscribe(
+      ({ character: mirageCharacter }) => {
+        this.character = mirageCharacter;
       }
     );
+
+    this.armageddon.characterData$.subscribe((data) => {
+      this.character = data;
+    });
   }
 
   getSegmentedHungerValue() {
