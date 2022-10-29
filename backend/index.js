@@ -1,21 +1,29 @@
 const net = require("net");
-const Convert = require("ansi-to-html");
-const convert = new Convert();
+const { ipcMain } = require("electron");
 
 const topicRoutes = require("./routes/topics");
 
 let moo;
-
-function connect(client) {
-  moo = net.connect({ host: "ginka.armageddon.org", port: "4050" }, (err) => {
+function connectToMUD(client) {
+  return net.connect({ host: "ginka.armageddon.org", port: "4050" }, (err) => {
     if (err) {
-      client.send("is-connected", false);
+      client.send("moo-connection-status", 0); // DISCONNECTED.
       client.send("message", "Failed to connect to Armageddon.\r\n");
       return;
     } else {
-      client.send("is-connected", true);
+      client.send("moo-connection-status", 2); // CONNECTED.
       client.send("message", "Connected to Armageddon.\r\n");
     }
+  });
+}
+
+function connect(client) {
+  client.send("moo-connection-status", 1); // CONNECTING
+  moo = connectToMUD(client);
+
+  ipcMain.on("moo-connect", () => {
+    moo.destroy();
+    moo = connectToMUD(client);
   });
 
   moo.setKeepAlive(true, 120000);
@@ -36,7 +44,7 @@ function connect(client) {
   });
 
   moo.on("end", () => {
-    client.send("is-connected", false);
+    client.send("moo-connection-status", 0); // DISCONNECTED.
     client.send("message", "Disconnected from Armageddon.\r\n");
   });
 
