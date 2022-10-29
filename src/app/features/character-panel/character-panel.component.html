@@ -1,4 +1,6 @@
-<div class="h-full w-full flex flex-col justify-end bg-gray-800 p-2 pb-4 pl-4 pr-4">
+<div
+  class="h-full w-full flex flex-col justify-end bg-gray-800 p-2 pb-4 pl-4 pr-4"
+>
   <!--
     @TODO: Character data to be used in the future
     <p>{{ character.longDescriptionStatus }}</p>
@@ -15,101 +17,101 @@
   -->
   <!-- Character Name -->
   <h1 class="text-2xl text-slate-200">{{ character.name }}</h1>
-    <!-- Armed Status -->
-    <div
+  <!-- Armed Status -->
+  <div
     class="text-sm flex items-center gap-1"
     [ngClass]="{
       'text-red-700': character.armed == 'armed',
       'text-slate-200': character.armed !== 'armed'
     }"
     *ngIf="character.armed !== ''"
-    >
-      <ng-icon name="jamSwordF" *ngIf="character.armed == 'armed'"></ng-icon>
-      <ng-icon name="matFrontHand" *ngIf="character.armed == 'unarmed'"></ng-icon>
-      <p>{{ character.armed }}</p>
-    </div>
-    <!-- Time -->
-    <div class="flex text-slate-200 text-sm items-center gap-1">
-      <ng-icon
-        name="matNightlight"
-        *ngIf="
-          character.time == 'late at night' || character.time == 'before dawn'
-        "
-      ></ng-icon>
-      <ng-icon
-        name="matWbSunny"
-        *ngIf="
-          character.time == 'early morning' ||
-          character.time == 'late morning' ||
-          character.time == 'high sun' ||
-          character.time == 'early afternoon' ||
-          character.time == 'late afternoon'
-        "
-      ></ng-icon>
-      <ng-icon
-        name="matWbTwilight"
-        *ngIf="character.time == 'dawn' || character.time == 'dusk'"
-      ></ng-icon>
-      <p>{{ character.time }} on {{ character.day }}</p>
-    </div>
-    <!-- Character speed -->
-    <div class="flex text-slate-200 text-sm items-center gap-1">
-      <ng-icon name="ionFootsteps" *ngIf="character.speed"></ng-icon>
-      <p *ngIf="character.speed">
-        {{ character.speed }}
-      </p>
-    </div>
-      <!-- Encumbrance -->
-      <div
-      class="flex text-slate-200 text-sm items-center gap-1"
-      *ngIf="character.encumberance"
-    >
-      <ng-icon name="heroScaleSolid"></ng-icon>
-      <p>{{ character.encumberance }}</p>
-    </div>
-    <!-- Character Position -->
-    <div class="flex text-slate-200 text-sm items-center gap-1">
-      <ng-icon name="matBoy" *ngIf="character.position == 'standing'"></ng-icon>
-      <ng-icon
-        name="matChairAlt"
-        *ngIf="character.position == 'sitting'"
-      ></ng-icon>
-      <ng-icon name="matBed" *ngIf="character.position == 'resting'"></ng-icon>
-      <p>{{ character.verbosePosition }}</p>
-    </div>
-    <!-- Accent and Language -->
-    <div class="flex text-slate-200 text-sm items-center gap-1">
-      <ng-icon name="matTranslate" *ngIf="character.accent"></ng-icon>
-      <p *ngIf="character.accent">
-        {{ character.accent }}-accented {{ character.language }}
-      </p>
-    </div>
-    <!-- Character scan -->
-    <div
-      class="flex text-slate-200 text-sm items-center gap-1"
-      [ngClass]="{
-        'text-slate-200': character.scan,
-        'text-slate-600': !character.scan
-      }"
-    >
-      <ng-icon name="ionEye"></ng-icon>
-      <p>
-        {{ character.scan.toLowerCase() ? "scannng" : "not scanning" }}
-      </p>
-    </div>
-    <!-- Character listen -->
-    <div
-      class="flex text-slate-200 text-sm items-center gap-1"
-      [ngClass]="{
-        'text-slate-200': character.listen,
-        'text-slate-600': !character.listen
-      }"
-    >
-      <ng-icon name="ionEar"></ng-icon>
-      <p>
-        {{ character.listen ? "listening" : "not listening" }}
-      </p>
-    </div>
+  >
+    <ng-icon name="jamSwordF" *ngIf="character.armed == 'armed'"></ng-icon>
+    <ng-icon name="matFrontHand" *ngIf="character.armed == 'unarmed'"></ng-icon>
+    <p>{{ character.armed }}</p>
+  </div>
+  <!-- Time -->
+  <div class="flex text-slate-200 text-sm items-center gap-1">
+    <ng-icon
+      name="matNightlight"
+      *ngIf="
+        character.time == 'late at night' || character.time == 'before dawn'
+      "
+    ></ng-icon>
+    <ng-icon
+      name="matWbSunny"
+      *ngIf="
+        character.time == 'early morning' ||
+        character.time == 'late morning' ||
+        character.time == 'high sun' ||
+        character.time == 'early afternoon' ||
+        character.time == 'late afternoon'
+      "
+    ></ng-icon>
+    <ng-icon
+      name="matWbTwilight"
+      *ngIf="character.time == 'dawn' || character.time == 'dusk'"
+    ></ng-icon>
+    <p>{{ character.time }} on {{ character.day }}</p>
+  </div>
+  <!-- Character speed -->
+  <div class="flex text-slate-200 text-sm items-center gap-1">
+    <ng-icon name="ionFootsteps" *ngIf="character.speed"></ng-icon>
+    <p *ngIf="character.speed">
+      {{ character.speed }}
+    </p>
+  </div>
+  <!-- Encumbrance -->
+  <div
+    class="flex text-slate-200 text-sm items-center gap-1"
+    *ngIf="character.encumberance"
+  >
+    <ng-icon name="heroScaleSolid"></ng-icon>
+    <p>{{ character.encumberance }}</p>
+  </div>
+  <!-- Character Position -->
+  <div class="flex text-slate-200 text-sm items-center gap-1">
+    <ng-icon name="matBoy" *ngIf="character.position == 'standing'"></ng-icon>
+    <ng-icon
+      name="matChairAlt"
+      *ngIf="character.position == 'sitting'"
+    ></ng-icon>
+    <ng-icon name="matBed" *ngIf="character.position == 'resting'"></ng-icon>
+    <p>{{ character.verbosePosition }}</p>
+  </div>
+  <!-- Accent and Language -->
+  <div class="flex text-slate-200 text-sm items-center gap-1">
+    <ng-icon name="matTranslate" *ngIf="character.accent"></ng-icon>
+    <p *ngIf="character.accent">
+      {{ character.accent }}-accented {{ character.language }}
+    </p>
+  </div>
+  <!-- Character scan -->
+  <div
+    class="flex text-slate-200 text-sm items-center gap-1"
+    [ngClass]="{
+      'text-slate-200': character.scan,
+      'text-slate-600': !character.scan
+    }"
+  >
+    <ng-icon name="ionEye"></ng-icon>
+    <p>
+      {{ character.scan.toLowerCase() ? "scannng" : "not scanning" }}
+    </p>
+  </div>
+  <!-- Character listen -->
+  <div
+    class="flex text-slate-200 text-sm items-center gap-1"
+    [ngClass]="{
+      'text-slate-200': character.listen,
+      'text-slate-600': !character.listen
+    }"
+  >
+    <ng-icon name="ionEar"></ng-icon>
+    <p>
+      {{ character.listen ? "listening" : "not listening" }}
+    </p>
+  </div>
 
   <!-- Attribute Bars -->
 
@@ -122,17 +124,17 @@
   ></app-attribute-progress-bar>
   <!-- Stun -->
   <app-attribute-progress-bar
-  attribute="Stun"
-  color="gray"
-  [value]="character.stun"
-  [maxValue]="character.maxStun"
+    attribute="Stun"
+    color="gray"
+    [value]="character.stun"
+    [maxValue]="character.maxStun"
   ></app-attribute-progress-bar>
   <!-- Stamina -->
   <app-attribute-progress-bar
-  attribute="Stamina"
-  color="emerald"
-  [value]="character.stamina"
-  [maxValue]="character.maxStamina"
+    attribute="Stamina"
+    color="emerald"
+    [value]="character.stamina"
+    [maxValue]="character.maxStamina"
   ></app-attribute-progress-bar>
   <!-- Mana -->
   <app-attribute-progress-bar
@@ -143,16 +145,16 @@
   ></app-attribute-progress-bar>
   <!-- Focus -->
   <app-attribute-progress-bar
-  attribute="Focus"
-  color="violet"
-  [value]="character.focus"
-  [maxValue]="character.maxFocus"
+    attribute="Focus"
+    color="violet"
+    [value]="character.focus"
+    [maxValue]="character.maxFocus"
   ></app-attribute-progress-bar>
   <!-- Hunger -->
   <app-segmented-attribute-progress-bar
-  attribute="Hunger"
-  [value]="getSegmentedHungerValue()"
-  [valueLabel]="character.hunger"
+    attribute="Hunger"
+    [value]="getSegmentedHungerValue()"
+    [valueLabel]="character.hunger"
   ></app-segmented-attribute-progress-bar>
   <!-- Thirst -->
   <app-segmented-attribute-progress-bar
