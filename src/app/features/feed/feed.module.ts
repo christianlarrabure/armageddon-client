@@ -11,18 +11,30 @@ import {
 } from '@ng-icons/material-icons/baseline';
 import { NgIconsModule } from '@ng-icons/core';
 import { FeedContentComponent } from './components/feed-content/feed-content.component';
+import { ItemPriceComponent } from './components/item-price/item-price.component';
+import { SingleItemPriceComponent } from './components/single-item-price/single-item-price.component';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
-  declarations: [FeedComponent, FeedItemComponent, FeedContentComponent],
+  declarations: [
+    FeedComponent,
+    FeedItemComponent,
+    FeedContentComponent,
+    ItemPriceComponent,
+    SingleItemPriceComponent,
+  ],
   imports: [
     CommonModule,
     TopicsModule,
+    SharedModule,
     NgIconsModule.withIcons({
       matDoDisturb,
       matArrowRight,
       matArrowDropUp,
       matEdit,
     }),
+    FormsModule,
   ],
   exports: [FeedComponent],
 })

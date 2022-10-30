@@ -27,11 +27,14 @@ exports.init = () => {
   });
 
   ipcMain.on("getTopic", (event, id) => {
-    controller.getTopic(id).then((topic) => {
-      event.sender.send("selectedTopic", topic);
-    }).catch(error=>{
+    controller
+      .getTopic(id)
+      .then((topic) => {
+        event.sender.send("selectedTopic", topic);
+      })
+      .catch((error) => {
         console.error(error);
-    });
+      });
   });
 
   ipcMain.on("updateTopic", (event, topic) => {

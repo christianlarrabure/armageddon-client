@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { TopicsService } from '../../../../topics/topics.service';
+import { TopicsService } from '../../../../topics/services/topics.service';
 import Topic from '../../../../models/topic.model';
 
 @Component({

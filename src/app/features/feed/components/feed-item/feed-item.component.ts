@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import Topic from '../../../../models/topic.model';
-import { TopicsService } from '../../../../topics/topics.service';
+import { TopicsService } from '../../../../topics/services/topics.service';
+import { TopicPricesService } from '../../../../topics/services/topic-prices.service';
+import { Observable } from 'rxjs';
+import TopicPrice from 'src/app/models/topicPrice.model';
 
 @Component({
   selector: 'app-feed-item',

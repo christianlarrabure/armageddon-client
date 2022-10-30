@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, filter, combineLatest, map } from 'rxjs';
-import { TelnetService } from '../features/telnet.service';
-import Topic from '../models/topic.model';
-import { ArmageddonService } from '../armageddon/armageddon.service';
+import { TelnetService } from '../../features/telnet.service';
+import Topic from '../../models/topic.model';
+import { ArmageddonService } from '../../armageddon/armageddon.service';
 
 @Injectable({
   providedIn: 'root',

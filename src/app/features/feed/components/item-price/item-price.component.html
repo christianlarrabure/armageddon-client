@@ -1,0 +1,22 @@
+<div class="text-xs w-full">
+  <p class="mt-2 mb-2">You know of these prices...</p>
+  <app-single-item-price
+    *ngFor="let price of topicPrices$ | async"
+    [topicPrice]="price"
+  ></app-single-item-price>
+  <app-single-item-price
+    *ngIf="creating === true"
+    [topicPrice]="{
+      topicId: topic?.id ?? 0,
+      source: '',
+      price: 0,
+      date: undefined
+    }"
+    (saved)="creating = false"
+  ></app-single-item-price>
+  <div class="flex justify-center">
+    <p class="text-green-500 cursor-pointer" (click)="addNew()">
+      Add new price
+    </p>
+  </div>
+</div>
