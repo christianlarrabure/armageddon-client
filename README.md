@@ -17,3 +17,7 @@ You can unzip the file appropriate for your OS and extract it in a folder you wi
 It will create a data.sqlite file which is where your data is stored.
 
 Make sure to write _prompt upon logging in.
+
+## Windows Executable (Setup.exe)
+
+Click on Setup.exe then pin the app when it launches it so that you can just quick run it next time. When you run it, it will create data.sqlite. Do not delete that unless you want to lose your data.
