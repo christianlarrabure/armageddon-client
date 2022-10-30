@@ -42,7 +42,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.telnet.send('init');
   }
 
-  title = 'client';
+  title = 'Unofficial Armageddon Client';
   showCharacters: boolean = false;
   appView: AppView = AppView.APP;
 
