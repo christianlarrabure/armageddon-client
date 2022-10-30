@@ -9,9 +9,12 @@ const Topic = sequelize.define("Topic", {
   },
   name: {
     type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: "Unknown Name",
   },
   content: {
     type: Sequelize.STRING,
+    allowNull: true,
   },
   isA: {
     type: Sequelize.STRING,
@@ -21,6 +24,7 @@ const Topic = sequelize.define("Topic", {
   sdesc: {
     type: Sequelize.STRING,
     default: "",
+    allowNull: true,
   },
 });
 

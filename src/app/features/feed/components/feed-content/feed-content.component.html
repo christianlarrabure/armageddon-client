@@ -1,7 +1,10 @@
 <div class="mt-2">
   <p
     class="text-xs text-orange-500 flex gap-2 cursor-pointer items-center"
-    *ngIf="(topic?.content ?? '').length > 0 && !showMore"
+    *ngIf="
+      ((topic?.content ?? '').length > 0 || topic?.isA === 'object') &&
+      !showMore
+    "
     (click)="showMore = true"
   >
     <ng-icon name="matArrowRight"></ng-icon>
@@ -9,7 +12,9 @@
   </p>
   <p
     class="text-xs text-orange-500 flex gap-2 cursor-pointer items-center"
-    *ngIf="(topic?.content ?? '').length > 0 && showMore"
+    *ngIf="
+      ((topic?.content ?? '').length > 0 || topic?.isA === 'object') && showMore
+    "
     (click)="showMore = false"
   >
     <ng-icon name="matArrowDropUp"></ng-icon>
@@ -20,4 +25,8 @@
     *ngIf="(topic?.content ?? '').length > 0 && showMore"
     class="mt-2 text-xs"
   ></p>
+  <app-item-price
+    [topic]="topic"
+    *ngIf="topic?.isA === 'object' && showMore"
+  ></app-item-price>
 </div>

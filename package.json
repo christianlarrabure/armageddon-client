@@ -26,7 +26,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng build && electron .",
+    "start": "ng build && electron . --trace-warnings",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "package": "electron-forge package",

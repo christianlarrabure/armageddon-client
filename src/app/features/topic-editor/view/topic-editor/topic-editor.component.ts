@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import Topic from 'src/app/models/topic.model';
-import { TopicsService } from '../../../../topics/topics.service';
+import { TopicsService } from '../../../../topics/services/topics.service';
 
 @Component({
   selector: 'app-topic-editor',
