@@ -29,15 +29,17 @@
       class="absolute bottom-1 right-2"
     >
       <ng-icon
-      *ngIf="characterSummaryCardLocked"
-      name="ionLockClosed"
-      class="text-slate-200 cursor-pointer hover:cursor_pointer hover:text-slate-300"
-      (click)="toggleCharacterSummaryCardLocked()"></ng-icon>
+        *ngIf="characterSummaryCardLocked"
+        name="ionLockClosed"
+        class="text-slate-200 cursor-pointer hover:cursor_pointer hover:text-slate-300"
+        (click)="toggleCharacterSummaryCardLocked()"
+      ></ng-icon>
       <ng-icon
         *ngIf="!characterSummaryCardLocked"
         name="ionLockOpen"
         class="text-slate-200 cursor-pointer hover:cursor-pointer hover:text-slate-300"
-        (click)="toggleCharacterSummaryCardLocked()"></ng-icon>
+        (click)="toggleCharacterSummaryCardLocked()"
+      ></ng-icon>
     </div>
 
     <!-- Character Name -->
@@ -51,21 +53,30 @@
       (cdkDropListDropped)="drop($event)"
       [cdkDropListDisabled]="characterSummaryCardLocked"
     >
-      <div id="{{ item.id }}" *ngFor="let item of itemList" cdkDrag>
+      <div
+        id="{{ item.id }}"
+        *ngFor="let item of itemList"
+        (dblclick)="toggleItemHiddenOnDoubleClick($event, item.id)"
+        cdkDrag
+      >
         <div
           class="
             summary-item-outer
-            inner
-            toggle-on-unlock
+            inner toggle-on-click
             h-0 overflow-hidden
-            transition-height linear duration-300 delay-[110ms]
+            transition-height linear duration-100 delay-[150ms]
           "
-          [attr.data-collapsed]="true"
+          [attr.data-collapsed]="!item.show"
+          [ngClass]="{
+            'toggle-on-unlock': !item.show
+          }"
+          [ngStyle]="{ 'height': item.show && '20px' }"
         >
           <app-character-summary-item
             [variant]="item.variant"
             [data]="item.data || []"
             [visibility]="item.visibility"
+            [unlocked]="!characterSummaryCardLocked"
           ></app-character-summary-item>
         </div>
       </div>

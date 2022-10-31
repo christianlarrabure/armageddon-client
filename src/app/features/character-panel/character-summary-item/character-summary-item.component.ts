@@ -11,6 +11,7 @@ export class CharacterSummaryItemComponent implements OnInit {
   @Input() data: string[] = [];
   // @TODO: Maybe witch this to key-value pairs
   @Input() visibility: boolean[] = [true, true, false];
+  @Input() unlocked: boolean = false;
 
   constructor() { }
 

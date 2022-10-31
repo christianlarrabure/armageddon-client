@@ -3,10 +3,11 @@
   *ngIf="isSeparator()"
   class="
     summary-item
-    text-sm
     flex items-center gap-1
+    text-sm text-slate-200
   "
   [ngClass]="{
+    'summary-item-unlocked': unlocked,
     'opacity-0': visibility[0],
     'fade-in': visibility[1],
     'fade-out': visibility[2]
@@ -22,10 +23,11 @@
   *ngIf="isArmed()"
   class="
     summary-item
-    text-sm
     flex items-center gap-1
+    text-sm text-slate-200
   "
   [ngClass]="{
+    'summary-item-unlocked': unlocked,
     'opacity-0': visibility[0],
     'fade-in': visibility[1],
     'fade-out': visibility[2],
@@ -42,12 +44,12 @@
   <div
     *ngIf="isTime()"
     class="
-      summary-item
-
-      flex items-center gap-1
-      text-sm text-slate-200
-    "
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
     [ngClass]="{
+      'summary-item-unlocked': unlocked,
       'opacity-0': visibility[0],
       'fade-in': visibility[1],
       'fade-out': visibility[2]
@@ -86,6 +88,7 @@
     text-sm text-slate-200
   "
   [ngClass]="{
+    'summary-item-unlocked': unlocked,
     'opacity-0': visibility[0],
     'fade-in': visibility[1],
     'fade-out': visibility[2]
@@ -106,6 +109,7 @@
     text-sm text-slate-200
   "
   [ngClass]="{
+    'summary-item-unlocked': unlocked,
     'opacity-0': visibility[0],
     'fade-in': visibility[1],
     'fade-out': visibility[2],
@@ -128,6 +132,7 @@
     text-sm text-slate-200
   "
   [ngClass]="{
+    'summary-item-unlocked': unlocked,
     'opacity-0': visibility[0],
     'fade-in': visibility[1],
     'fade-out': visibility[2]
@@ -146,6 +151,7 @@
     text-sm text-slate-200
   "
   [ngClass]="{
+    'summary-item-unlocked': unlocked,
     'opacity-0': visibility[0],
     'fade-in': visibility[1],
     'fade-out': visibility[2]
@@ -169,6 +175,7 @@
     text-sm text-slate-200
   "
   [ngClass]="{
+    'summary-item-unlocked': unlocked,
     'opacity-0': visibility[0],
     'fade-in': visibility[1],
     'fade-out': visibility[2]
@@ -189,6 +196,7 @@
     text-sm text-slate-200
   "
   [ngClass]="{
+    'summary-item-unlocked': unlocked,
     'opacity-0': visibility[0],
     'fade-in': visibility[1],
     'fade-out': visibility[2],
@@ -211,6 +219,7 @@
     text-sm text-slate-200
   "
   [ngClass]="{
+    'summary-item-unlocked': unlocked,
     'opacity-0': visibility[0],
     'fade-in': visibility[1],
     'fade-out': visibility[2],

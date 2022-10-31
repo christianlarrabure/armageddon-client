@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import PlayerCharacter from 'src/app/models/playerCharacter.model';
 import { ArmageddonService } from '../../armageddon/armageddon.service';
 import { MirageService } from '../mirage/services/mirage.service';
@@ -54,18 +54,6 @@ export class CharacterPanelComponent implements OnInit {
 
   characterSummaryCardLocked = true;
 
-  characterSummaryCardConfig: CharacterSummaryCardConfig = {
-    armed: CharacterSummaryCardItemState.SHOW,
-    time: CharacterSummaryCardItemState.SHOW,
-    speed: CharacterSummaryCardItemState.SHOW,
-    flying: CharacterSummaryCardItemState.HIDE,
-    encumbrance: CharacterSummaryCardItemState.SHOW,
-    position: CharacterSummaryCardItemState.SHOW,
-    language: CharacterSummaryCardItemState.SHOW,
-    listen: CharacterSummaryCardItemState.SHOW,
-    scan: CharacterSummaryCardItemState.SHOW,
-  };
-
   @Output() clickOn = new EventEmitter<string>();
 
   @Output() dialogOpen = new EventEmitter<boolean>();
@@ -81,6 +69,7 @@ export class CharacterPanelComponent implements OnInit {
       ({ character: mirageCharacter }) => {
         this.character = mirageCharacter;
         this.refreshItemList();
+
       }
     );
 
@@ -95,21 +84,13 @@ export class CharacterPanelComponent implements OnInit {
   // Character Card utilities
   itemList = [
     {
-      id: "character-card-separator",
-      variant: CharacterSummaryItemVariant.SEPARATOR,
-      data: ["Hidden - drag above to show"],
-      visibility: [true, true, false],
-      setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
-        this.visibility = [hidden, fadeIn, fadeOut];
-      },
-    },
-    {
       id: "character-card-armed",
       type: "item",
       variant: CharacterSummaryItemVariant.ARMED,
       data: [this.character.armed],
       refreshData: function(character: PlayerCharacter) { this.data = [character.armed] },
-      visibility: [true, true, false],
+      show: true,
+      visibility: [false, false, true],
       setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
         this.visibility = [hidden, fadeIn, fadeOut];
       },
@@ -120,7 +101,8 @@ export class CharacterPanelComponent implements OnInit {
       variant: CharacterSummaryItemVariant.TIME,
       data: [this.character.time, this.character.day],
       refreshData: function (character: PlayerCharacter) { this.data = [character.time, character.day] },
-      visibility: [true, true, false],
+      show: true,
+      visibility: [false, false, true],
       setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
         this.visibility = [hidden, fadeIn, fadeOut];
       },
@@ -131,7 +113,8 @@ export class CharacterPanelComponent implements OnInit {
       variant: CharacterSummaryItemVariant.SPEED,
       data: [this.character.speed],
       refreshData: function (character: PlayerCharacter) { this.data = [character.speed] },
-      visibility: [true, true, false],
+      show: true,
+      visibility: [false, false, true],
       setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
         this.visibility = [hidden, fadeIn, fadeOut];
       },
@@ -142,7 +125,8 @@ export class CharacterPanelComponent implements OnInit {
       variant: CharacterSummaryItemVariant.ENCUMBRANCE,
       data: [this.character.encumbrance],
       refreshData: function (character: PlayerCharacter) { this.data = [character.encumbrance] },
-      visibility: [true, true, false],
+      show: true,
+      visibility: [false, false, true],
       setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
         this.visibility = [hidden, fadeIn, fadeOut];
       },
@@ -153,7 +137,8 @@ export class CharacterPanelComponent implements OnInit {
       variant: CharacterSummaryItemVariant.POSITION,
       data: [this.character.position, this.character.verbosePosition],
       refreshData: function (character: PlayerCharacter) { this.data = [character.position, character.verbosePosition] },
-      visibility: [true, true, false],
+      show: true,
+      visibility: [false, false, true],
       setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
         this.visibility = [hidden, fadeIn, fadeOut];
       },
@@ -164,7 +149,8 @@ export class CharacterPanelComponent implements OnInit {
       variant: CharacterSummaryItemVariant.LANGUAGE,
       data: [this.character.accent, this.character.language],
       refreshData: function (character: PlayerCharacter) { this.data = [character.accent, character.language] },
-      visibility: [true, true, false],
+      show: true,
+      visibility: [false, false, true],
       setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
         this.visibility = [hidden, fadeIn, fadeOut];
       },
@@ -175,7 +161,8 @@ export class CharacterPanelComponent implements OnInit {
       variant: CharacterSummaryItemVariant.SCAN,
       data: [this.character.scan],
       refreshData: function (character: PlayerCharacter) { this.data = [character.scan] },
-      visibility: [true, true, false],
+      show: true,
+      visibility: [false, false, true],
       setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
         this.visibility = [hidden, fadeIn, fadeOut];
       },
@@ -186,6 +173,16 @@ export class CharacterPanelComponent implements OnInit {
       variant: CharacterSummaryItemVariant.LISTEN,
       data: [this.character.listen],
       refreshData: function (character: PlayerCharacter) { this.data = [character.listen] },
+      show: true,
+      visibility: [false, false, true],
+      setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
+        this.visibility = [hidden, fadeIn, fadeOut];
+      },
+    },
+    {
+      id: "character-card-separator",
+      variant: CharacterSummaryItemVariant.SEPARATOR,
+      data: ["Hidden - drag above to show"],
       visibility: [true, true, false],
       setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
         this.visibility = [hidden, fadeIn, fadeOut];
@@ -203,6 +200,36 @@ export class CharacterPanelComponent implements OnInit {
       },
     },
   ];
+
+  toggleItemHidden(id: string) {
+    const previousIndex = this.itemList.findIndex(item => item.id === id);
+    if (previousIndex < 0) return;
+    let parent = document.querySelector(`#${id}`);
+    if (!parent) return;
+
+    let elem = parent.querySelector('.inner');
+
+    toggleElementById(id, 'toggle-on-click');
+    setTimeout(() => {
+      moveItemInArray(this.itemList, previousIndex, this.getHiddenSeparatorIndex());
+      const currentIndex = this.itemList.findIndex(item => item.id === id);
+
+      setTimeout(() => {
+        toggleElementById(id, 'toggle-on-click');
+
+        if (currentIndex <= this.getHiddenSeparatorIndex()) {
+          elem?.classList.remove("toggle-on-unlock");
+        } else if (currentIndex > this.getHiddenSeparatorIndex()) {
+          elem?.querySelector(".inner")?.classList.add("toggle-on-unlock");
+        }
+
+      }, 200);
+    }, 300);
+  }
+
+  toggleItemHiddenOnDoubleClick(_event: Event, id: string) {
+    this.toggleItemHidden(id);
+  }
 
   refreshItemList() {
     for (const item of this.itemList) {
@@ -284,20 +311,14 @@ export class CharacterPanelComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<any[]>) {
-    console.log("itemList before: ", this.itemList);
     moveItemInArray(this.itemList, event.previousIndex, event.currentIndex);
     if (event.currentIndex <= this.getHiddenSeparatorIndex()) {
-      console.log("Detected move above hidden sep");
       event.item.element.nativeElement
         .querySelector(".inner")?.classList.remove("toggle-on-unlock");
     } else if (event.currentIndex > this.getHiddenSeparatorIndex()) {
-      console.log("Detected move below hidden sep");
-      event.item.element.nativeElement
-        .querySelector(".inner")?.classList.remove("toggle-on-unlock");
       event.item.element.nativeElement
         .querySelector(".inner")?.classList.add("toggle-on-unlock");
     }
-    console.log("itemList after: ", this.itemList);
   }
 
   getHiddenSeparatorIndex() {
@@ -316,7 +337,6 @@ export class CharacterPanelComponent implements OnInit {
         this.unassignHiddenFromItemList();
         this.assignFadeInToItemList();
       }
-      console.log(this.itemList);
     });
   }
 
@@ -366,21 +386,18 @@ export class CharacterPanelComponent implements OnInit {
   }
 }
 
-interface CharacterSummaryCardConfig {
-  armed: CharacterSummaryCardItemState;
-  time: CharacterSummaryCardItemState;
-  speed: CharacterSummaryCardItemState;
-  flying: CharacterSummaryCardItemState;
-  encumbrance: CharacterSummaryCardItemState;
-  position: CharacterSummaryCardItemState;
-  language: CharacterSummaryCardItemState;
-  listen: CharacterSummaryCardItemState;
-  scan: CharacterSummaryCardItemState;
+function toggleElementById(id: string, className: string) {
+  let elem = document.querySelector('#' + id);
+
+  if (!elem) return;
+
+  toggleChildClassByClassName(elem, `.${className}`);
 }
-``
-enum CharacterSummaryCardItemState {
-  SHOW,
-  HIDE
+
+function toggleChildClassByClassName(parent: Element, className: string) {
+  let elem = parent.querySelector(className) as HTMLElement;
+
+  toggleClass(elem);
 }
 
 function toggleClassByClassName(className: string) {
@@ -426,10 +443,6 @@ function collapseSection(element: any) {
     // have the element transition to height: 0 and opacity: 0
     requestAnimationFrame(function() {
       element.style.height = 0 + 'px';
-
-      // set the opacity of the summary-item element
-      const innerElem = element.querySelector('app-character-summary-item .summary-item');
-      console.log(innerElem);
     });
   });
 
