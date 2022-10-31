@@ -23,8 +23,10 @@ import {
   matGroup,
   matFullscreenExit,
   matLocationOn,
+  matSettings,
 } from '@ng-icons/material-icons/baseline';
-import { ionFootsteps, ionEar, ionEye } from '@ng-icons/ionicons';
+import { ionFootsteps, ionEar, ionEye, ionLockOpen, ionLockClosed } from '@ng-icons/ionicons';
+import { featherFeather } from '@ng-icons/feather-icons';
 import { CharacterPanelComponent } from './features/character-panel/character-panel.component';
 import { AttributeProgressBarComponent } from './features/character-panel/attribute-progress-bar/attribute-progress-bar.component';
 import { CharactersDialogComponent } from './features/characters-dialog/characters-dialog.component';
@@ -41,6 +43,8 @@ import { SegmentedAttributeProgressBarComponent } from './features/character-pan
 import { FeedModule } from './features/feed/feed.module';
 import { MirageModule } from './features/mirage/mirage.module';
 import { ReconnectViewComponent } from './features/reconnect-view/reconnect-view.component';
+import { CharacterSummaryConfigPanelComponent } from './features/character-panel/character-summary-config-panel/character-summary-config-panel.component';
+import { CharacterSummaryItemComponent } from './features/character-panel/character-summary-item/character-summary-item.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,8 @@ import { ReconnectViewComponent } from './features/reconnect-view/reconnect-view
     CheckboxComponent,
     SegmentedAttributeProgressBarComponent,
     ReconnectViewComponent,
+    CharacterSummaryConfigPanelComponent,
+    CharacterSummaryItemComponent,
   ],
   imports: [
     ArmageddonModule,
@@ -84,9 +90,13 @@ import { ReconnectViewComponent } from './features/reconnect-view/reconnect-view
       matGroup,
       matFullscreenExit,
       matLocationOn,
+      matSettings,
       ionFootsteps,
       ionEar,
       ionEye,
+      ionLockOpen,
+      ionLockClosed,
+      featherFeather,
     }),
     QuillModule.forRoot(),
   ],
