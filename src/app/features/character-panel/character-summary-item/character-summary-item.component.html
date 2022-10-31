@@ -1,1 +1,225 @@
-<p>character-summary-item works!</p>
+<!-- Hidden Separator -->
+<div
+  *ngIf="isSeparator()"
+  class="
+    summary-item
+    text-sm
+    flex items-center gap-1
+  "
+  [ngClass]="{
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2]
+  }"
+>
+  <div class="w-full border-b border-solid border-slate-400 text-sm text-slate-400">
+    {{ data[0] }}
+  </div>
+</div>
+
+<!-- Armed Status -->
+<div
+  *ngIf="isArmed()"
+  class="
+    summary-item
+    text-sm
+    flex items-center gap-1
+  "
+  [ngClass]="{
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2],
+    'text-slate-200': data[0] == 'armed',
+    'text-slate-600': data[0] !== 'armed'
+  }"
+>
+  <ng-icon name="jamSwordF" *ngIf="data[0] == 'armed'"></ng-icon>
+  <ng-icon name="matFrontHand" *ngIf="data[0] == 'unarmed'"></ng-icon>
+  <p>{{ data[0] }}</p>
+</div>
+
+<!-- Time -->
+  <div
+    *ngIf="isTime()"
+    class="
+      summary-item
+
+      flex items-center gap-1
+      text-sm text-slate-200
+    "
+    [ngClass]="{
+      'opacity-0': visibility[0],
+      'fade-in': visibility[1],
+      'fade-out': visibility[2]
+    }"
+
+  >
+  <ng-icon
+    name="matNightlight"
+    *ngIf="
+      data[0] == 'late at night' || data[0] == 'before dawn'
+    "
+  ></ng-icon>
+  <ng-icon
+    name="matWbSunny"
+    *ngIf="
+      data[0] == 'early morning' ||
+      data[0] == 'late morning' ||
+      data[0] == 'high sun' ||
+      data[0] == 'early afternoon' ||
+      data[0] == 'late afternoon'
+    "
+  ></ng-icon>
+  <ng-icon
+    name="matWbTwilight"
+    *ngIf="data[0] == 'dawn' || data[0] == 'dusk'"
+  ></ng-icon>
+  <p>{{ data[0] }} on {{ data[1] }}</p>
+</div>
+
+<!-- Speed -->
+<div
+  *ngIf="isSpeed()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2]
+  }"
+>
+  <ng-icon name="ionFootsteps" *ngIf="data[0]"></ng-icon>
+  <p *ngIf="data[0]">
+    {{ data[0] }}
+  </p>
+</div>
+
+<!-- Flying Status -->
+<div
+  *ngIf="isFlying()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2],
+    'text-slate-200': data[0],
+    'text-slate-600': !data[0]
+  }"
+>
+  <ng-icon name="featherFeather"></ng-icon>
+  <p>
+    {{ data[0] ? "flying" : "not flying" }}
+  </p>
+</div>
+
+<!-- Encumbrance -->
+<div
+  *ngIf="isEncumbrance()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2]
+  }"
+>
+  <ng-icon name="heroScaleSolid"></ng-icon>
+  <p>{{ data[0] }}</p>
+</div>
+
+<!-- Character Position -->
+<div
+  *ngIf="isPosition()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2]
+  }"
+>
+  <ng-icon name="matBoy" *ngIf="data[0] == 'standing'"></ng-icon>
+  <ng-icon
+    name="matChairAlt"
+    *ngIf="data[0] == 'sitting'"
+  ></ng-icon>
+  <ng-icon name="matBed" *ngIf="data[0] == 'resting'"></ng-icon>
+  <p>{{ data[1] }}</p>
+</div>
+
+<!-- Accent and Language -->
+<div
+  *ngIf="isLanguage()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2]
+  }"
+>
+  <ng-icon name="matTranslate" *ngIf="data[0]"></ng-icon>
+  <p *ngIf="data[0]">
+    {{ data[0] }}-accented {{ data[1] }}
+  </p>
+</div>
+
+<!-- Scan Status -->
+<div
+  *ngIf="isScan()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2],
+    'text-slate-200': data[0],
+    'text-slate-600': !data[0]
+  }"
+>
+  <ng-icon name="ionEye"></ng-icon>
+  <p>
+    {{ data[0].toLowerCase() ? "scanning" : "not scanning" }}
+  </p>
+</div>
+
+<!-- Listen Status -->
+<div
+  *ngIf="isListen()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2],
+    'text-slate-200': data[0],
+    'text-slate-600': !data[0]
+  }"
+>
+  <ng-icon name="ionEar"></ng-icon>
+  <p>
+    {{ data[0] ? "listening" : "not listening" }}
+  </p>
+</div>

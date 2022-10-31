@@ -1,0 +1,10 @@
+.fade-in {
+  transition-property: opacity;
+  transition-delay: 350ms;
+  transition-duration: 200ms;
+}
+
+.fade-out {
+  transition-property: opacity;
+  transition-duration: 110ms;
+}

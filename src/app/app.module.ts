@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TerminalClientComponent } from './features/terminal-client/terminal-client.component';
@@ -45,6 +45,7 @@ import { MirageModule } from './features/mirage/mirage.module';
 import { ReconnectViewComponent } from './features/reconnect-view/reconnect-view.component';
 import { CharacterSummaryConfigPanelComponent } from './features/character-panel/character-summary-config-panel/character-summary-config-panel.component';
 import { CharacterSummaryItemComponent } from './features/character-panel/character-summary-item/character-summary-item.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { CharacterSummaryItemComponent } from './features/character-panel/charac
     AppRoutingModule,
     FormsModule,
     MirageModule,
+    DragDropModule,
     NgTerminalModule,
     NgIconsModule.withIcons({
       heroUserSolid,
@@ -99,6 +101,7 @@ import { CharacterSummaryItemComponent } from './features/character-panel/charac
       featherFeather,
     }),
     QuillModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
