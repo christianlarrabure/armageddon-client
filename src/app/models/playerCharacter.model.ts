@@ -23,7 +23,7 @@ export default interface PlayerCharacter {
     armed: 'armed'|'unarmed'|'';
     mood: string;
     time: 'before dawn'|'dawn'|'early morning'|'late morning'|'high sun'|'early afternoon'|'late afternoon'|'dusk'|'late at night'|'';
-    encumberance: string;
+    encumbrance: string;
     day: string;
     scan: string;
     listen: string;

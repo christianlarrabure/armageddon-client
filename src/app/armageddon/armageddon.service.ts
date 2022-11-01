@@ -51,7 +51,7 @@ export class ArmageddonService {
         armed: '',
         mood: result[23],
         time: '',
-        encumberance: result[25],
+        encumbrance: result[25],
         day: result[26],
         scan: result[27],
         listen: result[28],

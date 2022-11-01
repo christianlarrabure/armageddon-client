@@ -70,11 +70,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   // Helper methods for fetching AppView state
-  showReconnectView() {
+  showReconnectView(): boolean {
     return this.appView === AppView.RECONNECT;
   }
 
-  showAppView() {
+  showAppView(): boolean {
     return this.appView === AppView.APP;
   }
 }

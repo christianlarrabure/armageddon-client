@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TerminalClientComponent } from './features/terminal-client/terminal-client.component';
@@ -10,7 +10,7 @@ import { NgTerminalModule } from 'ng-terminal';
 import { TopBarComponent } from './features/top-bar/top-bar.component';
 import { NgIconsModule } from '@ng-icons/core';
 import { heroUserSolid, heroScaleSolid } from '@ng-icons/heroicons/solid';
-import { jamSwordF } from '@ng-icons/jam-icons';
+import { jamAlienF, jamAlien, jamBeerF, jamDoor, jamSwordF } from '@ng-icons/jam-icons';
 import {
   matChairAlt,
   matBoy,
@@ -23,8 +23,10 @@ import {
   matGroup,
   matFullscreenExit,
   matLocationOn,
+  matSettings,
 } from '@ng-icons/material-icons/baseline';
-import { ionFootsteps, ionEar, ionEye } from '@ng-icons/ionicons';
+import { ionFootsteps, ionFlag, ionEar, ionEye, ionLockOpen, ionLockClosed, ionShieldHalf, ionBug, ionWalk } from '@ng-icons/ionicons';
+import { featherFeather } from '@ng-icons/feather-icons';
 import { CharacterPanelComponent } from './features/character-panel/character-panel.component';
 import { AttributeProgressBarComponent } from './features/character-panel/attribute-progress-bar/attribute-progress-bar.component';
 import { CharactersDialogComponent } from './features/characters-dialog/characters-dialog.component';
@@ -41,6 +43,9 @@ import { SegmentedAttributeProgressBarComponent } from './features/character-pan
 import { FeedModule } from './features/feed/feed.module';
 import { MirageModule } from './features/mirage/mirage.module';
 import { ReconnectViewComponent } from './features/reconnect-view/reconnect-view.component';
+import { CharacterSummaryConfigPanelComponent } from './features/character-panel/character-summary-config-panel/character-summary-config-panel.component';
+import { CharacterSummaryItemComponent } from './features/character-panel/character-summary-item/character-summary-item.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -57,6 +62,8 @@ import { ReconnectViewComponent } from './features/reconnect-view/reconnect-view
     CheckboxComponent,
     SegmentedAttributeProgressBarComponent,
     ReconnectViewComponent,
+    CharacterSummaryConfigPanelComponent,
+    CharacterSummaryItemComponent,
   ],
   imports: [
     ArmageddonModule,
@@ -68,6 +75,7 @@ import { ReconnectViewComponent } from './features/reconnect-view/reconnect-view
     AppRoutingModule,
     FormsModule,
     MirageModule,
+    DragDropModule,
     NgTerminalModule,
     NgIconsModule.withIcons({
       heroUserSolid,
@@ -78,17 +86,30 @@ import { ReconnectViewComponent } from './features/reconnect-view/reconnect-view
       matNightlight,
       matWbTwilight,
       matTranslate,
+      jamAlien,
+      jamAlienF,
+      jamDoor,
+      jamBeerF,
       jamSwordF,
       matFrontHand,
       heroScaleSolid,
       matGroup,
       matFullscreenExit,
       matLocationOn,
+      matSettings,
       ionFootsteps,
       ionEar,
       ionEye,
+      ionFlag,
+      ionLockOpen,
+      ionLockClosed,
+      ionShieldHalf,
+      ionBug,
+      ionWalk,
+      featherFeather,
     }),
     QuillModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

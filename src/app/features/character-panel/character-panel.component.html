@@ -1,116 +1,82 @@
 <div
-  class="h-full w-full flex flex-col justify-end bg-gray-800 p-2 pb-4 pl-4 pr-4"
+  class="h-full w-full flex flex-col justify-end bg-gray-900 p-2 pb-4 pl-4 pr-4"
 >
   <!--
     @TODO: Character data to be used in the future
     <p>{{ character.longDescriptionStatus }}</p>
     <p>{{ character.longDescription }}</p>
-    <p>{{ character.visibility }}</p>
-    <p>{{ character.flying }}</p>
-    <p>{{ character.mount }}</p>
-    <p>{{ character.mood }}</p>
-    <p>{{ character.scan }}</p>
-    <p>{{ character.listen }}</p>
-    <p>{{ character.stance }}</p>
-    <p>{{ character.drunk }}</p>
-    <p>{{ character.combatQuit }}</p>
+    <p>{{ character.mounted }}</p>
   -->
-  <!-- Character Name -->
-  <h1 class="text-2xl text-slate-200">{{ character.name }}</h1>
-  <!-- Armed Status -->
+
+  <!-- Character Card -->
   <div
-    class="text-sm flex items-center gap-1"
-    [ngClass]="{
-      'text-red-700': character.armed == 'armed',
-      'text-slate-200': character.armed !== 'armed'
-    }"
-    *ngIf="character.armed !== ''"
+    id="character-card"
+    class="
+      relative
+      p-3
+      mb-4
+      bg-slate-800
+      rounded
+      select-none cursor-default
+    "
   >
-    <ng-icon name="jamSwordF" *ngIf="character.armed == 'armed'"></ng-icon>
-    <ng-icon name="matFrontHand" *ngIf="character.armed == 'unarmed'"></ng-icon>
-    <p>{{ character.armed }}</p>
-  </div>
-  <!-- Time -->
-  <div class="flex text-slate-200 text-sm items-center gap-1">
-    <ng-icon
-      name="matNightlight"
-      *ngIf="
-        character.time == 'late at night' || character.time == 'before dawn'
-      "
-    ></ng-icon>
-    <ng-icon
-      name="matWbSunny"
-      *ngIf="
-        character.time == 'early morning' ||
-        character.time == 'late morning' ||
-        character.time == 'high sun' ||
-        character.time == 'early afternoon' ||
-        character.time == 'late afternoon'
-      "
-    ></ng-icon>
-    <ng-icon
-      name="matWbTwilight"
-      *ngIf="character.time == 'dawn' || character.time == 'dusk'"
-    ></ng-icon>
-    <p>{{ character.time }} on {{ character.day }}</p>
-  </div>
-  <!-- Character speed -->
-  <div class="flex text-slate-200 text-sm items-center gap-1">
-    <ng-icon name="ionFootsteps" *ngIf="character.speed"></ng-icon>
-    <p *ngIf="character.speed">
-      {{ character.speed }}
-    </p>
-  </div>
-  <!-- Encumbrance -->
-  <div
-    class="flex text-slate-200 text-sm items-center gap-1"
-    *ngIf="character.encumberance"
-  >
-    <ng-icon name="heroScaleSolid"></ng-icon>
-    <p>{{ character.encumberance }}</p>
-  </div>
-  <!-- Character Position -->
-  <div class="flex text-slate-200 text-sm items-center gap-1">
-    <ng-icon name="matBoy" *ngIf="character.position == 'standing'"></ng-icon>
-    <ng-icon
-      name="matChairAlt"
-      *ngIf="character.position == 'sitting'"
-    ></ng-icon>
-    <ng-icon name="matBed" *ngIf="character.position == 'resting'"></ng-icon>
-    <p>{{ character.verbosePosition }}</p>
-  </div>
-  <!-- Accent and Language -->
-  <div class="flex text-slate-200 text-sm items-center gap-1">
-    <ng-icon name="matTranslate" *ngIf="character.accent"></ng-icon>
-    <p *ngIf="character.accent">
-      {{ character.accent }}-accented {{ character.language }}
-    </p>
-  </div>
-  <!-- Character scan -->
-  <div
-    class="flex text-slate-200 text-sm items-center gap-1"
-    [ngClass]="{
-      'text-slate-200': character.scan,
-      'text-slate-600': !character.scan
-    }"
-  >
-    <ng-icon name="ionEye"></ng-icon>
-    <p>
-      {{ character.scan.toLowerCase() ? "scanning" : "not scanning" }}
-    </p>
-  </div>
-  <!-- Character listen -->
-  <div
-    class="flex text-slate-200 text-sm items-center gap-1"
-    [ngClass]="{
-      'text-slate-200': character.listen,
-      'text-slate-600': !character.listen
-    }"
-  >
-    <ng-icon name="ionEar"></ng-icon>
-    <p>
-      {{ character.listen ? "listening" : "not listening" }}
-    </p>
+    <!-- Character Unlock Button -->
+    <div
+      class="absolute bottom-1 right-2"
+    >
+      <ng-icon
+        *ngIf="characterSummaryCardLocked"
+        name="ionLockClosed"
+        class="text-slate-200 cursor-pointer hover:cursor_pointer hover:text-slate-300"
+        (click)="toggleCharacterSummaryCardLocked()"
+      ></ng-icon>
+      <ng-icon
+        *ngIf="!characterSummaryCardLocked"
+        name="ionLockOpen"
+        class="text-slate-200 cursor-pointer hover:cursor-pointer hover:text-slate-300"
+        (click)="toggleCharacterSummaryCardLocked()"
+      ></ng-icon>
+    </div>
+
+    <!-- Character Name -->
+    <div class="flex justify-between">
+      <h1 class="text-2xl leading-none text-slate-200">{{ character.name }}</h1>
+    </div>
+
+    <div
+      class="summary-item-list flow"
+      cdkDropList
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListDisabled]="characterSummaryCardLocked"
+    >
+      <div
+        id="{{ item.id }}"
+        *ngFor="let item of itemList"
+        (dblclick)="toggleItemHiddenOnDoubleClick($event, item.id)"
+        cdkDrag
+      >
+        <div
+          class="
+            summary-item-outer
+            inner toggle-on-click
+            h-0 overflow-hidden
+            transition-height linear duration-100 delay-[150ms]
+          "
+          [attr.data-collapsed]="!item.show"
+          [ngClass]="{
+            'toggle-on-unlock': !item.show
+          }"
+          [ngStyle]="{ 'height': item.show && '20px' }"
+        >
+          <app-character-summary-item
+            [variant]="item.variant"
+            [data]="item.data || []"
+            [visibility]="item.visibility"
+            [unlocked]="!characterSummaryCardLocked"
+          ></app-character-summary-item>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Attribute Bars -->
@@ -153,18 +119,14 @@
   <!-- Hunger -->
   <app-segmented-attribute-progress-bar
     attribute="Hunger"
-    [value]="getSegmentedHungerValue()"
+    [value]="getHungerValue()"
     [valueLabel]="character.hunger"
   ></app-segmented-attribute-progress-bar>
   <!-- Thirst -->
   <app-segmented-attribute-progress-bar
     attribute="Thirst"
-    [value]="getSegmentedThirstValue()"
+    [value]="getThirstValue()"
     [valueLabel]="character.thirst"
   ></app-segmented-attribute-progress-bar>
-  <app-smart-search
-    class="mt-4"
-    (showChanged)="smartSearchChanged($event)"
-    (pickedTopic)="topicSelected($event)"
-  ></app-smart-search>
+  <app-character-summary-config-panel></app-character-summary-config-panel>
 </div>

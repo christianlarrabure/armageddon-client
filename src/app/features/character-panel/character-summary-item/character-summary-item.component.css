@@ -1,0 +1,18 @@
+.summary-item-unlocked:hover ng-icon {
+  color: #ea580c;
+}
+
+.summary-item-unlocked:hover p {
+  color: #ea580c;
+}
+
+.fade-in {
+  transition-property: opacity;
+  transition-delay: 350ms;
+  transition-duration: 200ms;
+}
+
+.fade-out {
+  transition-property: opacity;
+  transition-duration: 110ms;
+}
