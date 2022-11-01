@@ -1,0 +1,6 @@
+<div
+  [ngClass]="{ hideView: !active, showView: active }"
+  class="w-full h-full overflow-hidden"
+>
+  <ng-content class="w-full h-full overflow-scroll"></ng-content>
+</div>

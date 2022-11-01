@@ -23,8 +23,8 @@ export class SmartSearchComponent implements OnInit {
   }
 
   changeShow(value: boolean) {
-    this.showChanged.emit(value);
     this.show = value;
+    this.topicsService.smartSearchActive$.next(this.show);
   }
 
   handleSearch() {
@@ -33,8 +33,12 @@ export class SmartSearchComponent implements OnInit {
     });
   }
 
-  pickTopic(id: number | undefined) {
+  async pickTopic(id: number | undefined) {
     this.changeShow(false);
-    this.topicsService.selectedTopic.next(id);
+    if (id !== undefined) {
+      this.topicsService.getTopic(id).subscribe((topic) => {
+        this.topicsService.selectedTopics$.next([topic]);
+      });
+    }
   }
 }

@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, filter, combineLatest, map } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  filter,
+  combineLatest,
+  map,
+  merge,
+  BehaviorSubject,
+} from 'rxjs';
 import { TelnetService } from '../../features/telnet.service';
 import Topic from '../../models/topic.model';
 import { ArmageddonService } from '../../armageddon/armageddon.service';
@@ -13,13 +21,33 @@ export class TopicsService {
     private armageddon: ArmageddonService
   ) {}
 
-  public selectedTopic = new Subject<number | undefined>();
-  public editedTopic = new Subject<number | undefined>();
+  public smartSearchActive$ = new BehaviorSubject<boolean>(false);
+
+  public selectedTopic = new BehaviorSubject<number | undefined>(undefined);
+  public editedTopic = new BehaviorSubject<number | undefined>(undefined);
+
+  public selectedTopic$ = this.selectedTopic.asObservable().pipe(
+    map((topicId) => {
+      if (topicId === undefined) {
+        return undefined;
+      }
+      return this.getTopic(topicId);
+    })
+  );
+  public editedTopic$ = this.editedTopic.asObservable().pipe(
+    map((topicId) => {
+      if (topicId === undefined) {
+        return undefined;
+      }
+      return this.getTopic(topicId);
+    })
+  );
 
   private _topics$ = new Subject<Topic[]>();
+  public selectedTopics$ = new Subject<Topic[]>();
   public topics$ = this._topics$.asObservable();
 
-  public topicsMentioned$ = combineLatest([
+  private _topicsMentioned$ = combineLatest([
     this.topics$,
     this.armageddon.cleanMessages$,
   ]).pipe(
@@ -45,6 +73,8 @@ export class TopicsService {
       return value.length > 0;
     })
   );
+
+  public topicsMentioned$ = merge(this._topicsMentioned$, this.selectedTopics$);
 
   refreshTopics() {
     return new Promise((resolve, reject) => {

@@ -8,21 +8,27 @@ import {
   matArrowRight,
   matArrowDropUp,
   matEdit,
+  matArrowBack,
+  matSave,
 } from '@ng-icons/material-icons/baseline';
 import { NgIconsModule } from '@ng-icons/core';
-import { FeedContentComponent } from './components/feed-content/feed-content.component';
 import { ItemPriceComponent } from './components/item-price/item-price.component';
 import { SingleItemPriceComponent } from './components/single-item-price/single-item-price.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
+import { FeedViewComponent } from './components/feed-view/feed-view.component';
+import { TopicViewComponent } from './components/topic-view/topic-view.component';
+import { TopicEditComponent } from './components/topic-edit/topic-edit.component';
 
 @NgModule({
   declarations: [
     FeedComponent,
     FeedItemComponent,
-    FeedContentComponent,
     ItemPriceComponent,
     SingleItemPriceComponent,
+    FeedViewComponent,
+    TopicViewComponent,
+    TopicEditComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +39,8 @@ import { SharedModule } from '../../shared/shared.module';
       matArrowRight,
       matArrowDropUp,
       matEdit,
+      matArrowBack,
+      matSave,
     }),
     FormsModule,
   ],
