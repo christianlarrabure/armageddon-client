@@ -1,0 +1,54 @@
+<div class="text-white flex flex-col items-center w-full h-full">
+  <div class="w-full flex justify-start">
+    <button (click)="return()"><ng-icon name="matArrowBack"></ng-icon></button>
+  </div>
+  <div class="w-full h-full flex flex-col gap-2">
+    <div class="w-full">
+      <p class="font-semibold text-xs mb-1">Topic Name</p>
+      <input
+        type="text"
+        placeholder="Name"
+        class="bg-white w-full py-2 px-1 rounded-md text-black text-xs"
+        [(ngModel)]="topic.name"
+      />
+    </div>
+    <div class="w-full">
+      <p class="font-semibold text-xs m-b1">Type</p>
+      <select
+        class="bg-white w-full py-2 px-1 rounded-md text-black text-xs"
+        [(ngModel)]="topic.isA"
+      >
+        <option value="concept">Concept</option>
+        <option value="character">Character</option>
+        <option value="object">Object</option>
+      </select>
+    </div>
+    <div class="w-full" *ngIf="topic.isA !== 'concept'">
+      <p class="font-semibold text-xs mb-1">Sdesc</p>
+      <input
+        type="text"
+        placeholder="Name"
+        class="bg-white w-full py-2 px-1 rounded-md text-black text-xs"
+        [(ngModel)]="topic.sdesc"
+      />
+    </div>
+    <div class="w-full">
+      <p class="font-semibold text-xs mb-1">Notes</p>
+      <textarea
+        rows="5"
+        placeholder="Write your notes here"
+        class="bg-white w-full py-2 px-1 rounded-md text-black text-xs"
+        [(ngModel)]="topic.content"
+      ></textarea>
+    </div>
+    <div class="flex w-full justify-center">
+      <button
+        class="bg-green-500 hover:bg-green-600 px-2 py-1 rounded-full flex gap-1 text-white items-center"
+        (click)="saveItem()"
+      >
+        <ng-icon name="matSave"></ng-icon>
+        Save
+      </button>
+    </div>
+  </div>
+</div>

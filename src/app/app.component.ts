@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit, AfterViewInit } from '@angular/core';
 import { ArmageddonService } from './armageddon/armageddon.service';
 import { EConnectionStatus } from './armageddon/interfaces/connectionStatus.interface';
 import { TelnetService } from './features/telnet.service';
+import { TopicsService } from './topics/services/topics.service';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(
     private ngZone: NgZone,
     private armageddon: ArmageddonService,
-    private telnet: TelnetService
+    private telnet: TelnetService,
+    private topicsService: TopicsService
   ) {}
+
+  public smartSearchActive$ =
+    this.topicsService.smartSearchActive$.asObservable();
 
   ngOnInit(): void {
     this.armageddon.armageddonConnection$.subscribe((connectionStatus) => {

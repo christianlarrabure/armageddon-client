@@ -1,0 +1,13 @@
+.main-display {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+.feed-view {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  grid-row-start: 1;
+  grid-column-start: 1;
+}

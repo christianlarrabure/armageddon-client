@@ -1,14 +1,4 @@
-<app-topic-view (showChanged)="processDialogStatus($event)"></app-topic-view>
-<app-topic-editor
-  (showChanged)="processDialogStatus($event)"
-></app-topic-editor>
 <div>
-  <app-topics-database
-    (close)="showCharacters = false"
-    [active]="showCharacters"
-    (viewTopic)="openTopic($event)"
-  ></app-topics-database>
-
   <!-- Reconnect View -->
   <div
     *ngIf="showReconnectView()"
@@ -18,7 +8,10 @@
   </div>
 
   <!-- Core App View -->
-  <div *ngIf="showAppView()" class="flex h-screen w-screen bg-gray-800 overflow-hidden">
+  <div
+    *ngIf="showAppView()"
+    class="flex h-screen w-screen bg-gray-800 overflow-hidden"
+  >
     <app-character-panel
       class="w-1/6"
       (clickOn)="handleClick($event)"
@@ -26,7 +19,9 @@
     ></app-character-panel>
     <app-terminal-client
       class="grow"
-      [ngClass]="{ invisible: showCharacters || dialogOpen }"
+      [ngClass]="{
+        invisible: showCharacters || dialogOpen || (smartSearchActive$ | async)
+      }"
     >
       <app-input class="w-full"></app-input>
     </app-terminal-client>

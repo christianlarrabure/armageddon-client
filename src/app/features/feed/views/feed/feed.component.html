@@ -1,11 +1,39 @@
-<div class="h-full w-full bg-gray-900 p-2 overflow-hidden flex flex-col">
-  <h1 class="text-md border-b text-white mb-2">Context Menu</h1>
-  <app-smart-search></app-smart-search>
-  <div class="flex flex-col gap-2 h-full mt-2 pr-2 pb-2 overflow-y-scroll">
-    <app-feed-item
-      *ngFor="let topic of savedTopics"
-      [topic]="topic"
-      (clear)="clearItem(topic)"
-    ></app-feed-item>
-  </div>
+<div class="h-full w-full bg-gray-900 p-2 overflow-hidden main-display">
+  <app-feed-view class="feed-view" [active]="screen === SCREEN_CONTEXT_MENU">
+    <h1 class="text-md border-b text-white mb-2">Context Menu</h1>
+    <div class="flex gap-1 w-full">
+      <app-smart-search class="grow"></app-smart-search>
+      <button
+        class="bg-green-500 text-white rounded py-1 px-2"
+        (click)="newTopic()"
+      >
+        New
+      </button>
+    </div>
+    <div class="flex flex-col gap-2 h-full mt-2 pr-2 pb-2 overflow-y-scroll">
+      <app-feed-item
+        *ngFor="let topic of savedTopics"
+        [topic]="topic"
+        (clear)="clearItem(topic)"
+        (openPage)="openPage($event)"
+      ></app-feed-item>
+    </div>
+  </app-feed-view>
+  <app-feed-view class="feed-view" [active]="screen === SCREEN_TOPIC_VIEW">
+    <app-topic-view
+      (openPage)="openPage($event)"
+      [topic]="selectedTopic$ | async"
+    ></app-topic-view>
+  </app-feed-view>
+  <app-feed-view class="feed-view" [active]="screen === SCREEN_TOPIC_EDIT">
+    <app-topic-edit
+      (openPage)="openPage($event)"
+      [editedTopic$]="editedTopic$"
+      *ngIf="
+        screen === SCREEN_TOPIC_EDIT ||
+        (previousScreen === SCREEN_TOPIC_EDIT && !doneAnimating)
+      "
+    >
+    </app-topic-edit>
+  </app-feed-view>
 </div>

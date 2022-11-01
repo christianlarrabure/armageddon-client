@@ -1,0 +1,31 @@
+@keyframes show-view {
+  from {
+    transform: translateX(800px);
+  }
+  to {
+    transform: translateX(0px);
+  }
+}
+
+.showView {
+  animation-name: show-view;
+  animation-duration: 1000ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+}
+
+@keyframes hide-view {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(400px);
+  }
+}
+
+.hideView {
+  animation-name: hide-view;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
