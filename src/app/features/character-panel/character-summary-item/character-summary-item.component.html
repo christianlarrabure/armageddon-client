@@ -100,6 +100,29 @@
   </p>
 </div>
 
+<!-- Mounted Status -->
+<div
+  *ngIf="isMounted()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'summary-item-unlocked': unlocked,
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2],
+    'text-slate-600': data[0] === 'riding: none'
+  }"
+>
+  <ng-icon name="ionWalk" *ngIf="data[0] === 'riding: none'"></ng-icon>
+  <ng-icon name="ionBug" *ngIf="data[0] !== 'riding: none'"></ng-icon>
+  <p *ngIf="data[0]">
+    {{ data[0].toLowerCase() }}
+  </p>
+</div>
+
 <!-- Flying Status -->
 <div
   *ngIf="isFlying()"
@@ -114,12 +137,12 @@
     'fade-in': visibility[1],
     'fade-out': visibility[2],
     'text-slate-200': data[0],
-    'text-slate-600': !data[0]
+    'text-slate-600': data[0] == 'not flying'
   }"
 >
   <ng-icon name="featherFeather"></ng-icon>
   <p>
-    {{ data[0] ? "flying" : "not flying" }}
+    {{ data[0] }}
   </p>
 </div>
 
@@ -200,7 +223,6 @@
     'opacity-0': visibility[0],
     'fade-in': visibility[1],
     'fade-out': visibility[2],
-    'text-slate-200': data[0],
     'text-slate-600': !data[0]
   }"
 >
@@ -223,12 +245,121 @@
     'opacity-0': visibility[0],
     'fade-in': visibility[1],
     'fade-out': visibility[2],
-    'text-slate-200': data[0],
     'text-slate-600': !data[0]
   }"
 >
   <ng-icon name="ionEar"></ng-icon>
   <p>
     {{ data[0] ? "listening" : "not listening" }}
+  </p>
+</div>
+
+<!-- Drunk Status -->
+<div
+  *ngIf="isDrunk()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'summary-item-unlocked': unlocked,
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2]
+  }"
+>
+  <ng-icon name="jamBeerF"></ng-icon>
+  <p>
+    {{ data[0] }}
+  </p>
+</div>
+
+<!-- Mood -->
+<div
+  *ngIf="isMood()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'summary-item-unlocked': unlocked,
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2],
+    'text-slate-600': data[0] == 'neutral'
+  }"
+>
+  <ng-icon name="ionFlag"></ng-icon>
+  <p>
+    {{ data[0] }}
+  </p>
+</div>
+
+<!-- Stance -->
+<div
+  *ngIf="isStance()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'summary-item-unlocked': unlocked,
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2],
+    'text-slate-600': !data[0]
+  }"
+>
+  <ng-icon name="ionShieldHalf"></ng-icon>
+  <p>
+    {{ data[0] || 'no stance' }}
+  </p>
+</div>
+
+<!-- Combat Quit Status -->
+<div
+  *ngIf="isCombatQuit()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'summary-item-unlocked': unlocked,
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2],
+    'text-slate-600': data[0] == 'can_quit'
+  }"
+>
+  <ng-icon name="jamDoor"></ng-icon>
+  <p>
+    {{ data[0] == 'can_quit' ? 'may quit' : "can't quit" }}
+  </p>
+</div>
+
+<!-- Invisibility Status -->
+<div
+  *ngIf="isVisibility()"
+  class="
+    summary-item
+    flex items-center gap-1
+    text-sm text-slate-200
+  "
+  [ngClass]="{
+    'summary-item-unlocked': unlocked,
+    'opacity-0': visibility[0],
+    'fade-in': visibility[1],
+    'fade-out': visibility[2],
+    'text-slate-600': data[0] === 'Vis'
+  }"
+>
+  <ng-icon *ngIf="data[0] === 'Vis'" name="jamAlienF"></ng-icon>
+  <ng-icon *ngIf="data[0] !== 'Vis'" name="jamAlien"></ng-icon>
+  <p>
+    {{ data[0] == 'Vis' ? 'visible' : 'invisible' }}
   </p>
 </div>

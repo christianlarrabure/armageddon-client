@@ -34,6 +34,10 @@ export class CharacterSummaryItemComponent implements OnInit {
     return this.variant === CharacterSummaryItemVariant.SPEED;
   }
 
+  isMounted() {
+    return this.variant === CharacterSummaryItemVariant.MOUNTED;
+  }
+
   isFlying() {
     return this.variant === CharacterSummaryItemVariant.FLYING;
   }
@@ -56,5 +60,25 @@ export class CharacterSummaryItemComponent implements OnInit {
 
   isListen() {
     return this.variant === CharacterSummaryItemVariant.LISTEN;
+  }
+
+  isDrunk() {
+    return this.variant === CharacterSummaryItemVariant.DRUNK;
+  }
+
+  isMood() {
+    return this.variant === CharacterSummaryItemVariant.MOOD;
+  }
+
+  isStance() {
+    return this.variant === CharacterSummaryItemVariant.STANCE;
+  }
+
+  isCombatQuit() {
+    return this.variant === CharacterSummaryItemVariant.QUIT;
+  }
+
+  isVisibility() {
+    return this.variant === CharacterSummaryItemVariant.VISIBILITY;
   }
 }

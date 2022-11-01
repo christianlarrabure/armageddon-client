@@ -189,11 +189,77 @@ export class CharacterPanelComponent implements OnInit {
       },
     },
     {
+      id: "character-card-mounted",
+      type: "item",
+      variant: CharacterSummaryItemVariant.MOUNTED,
+      data: [this.character.mount],
+      refreshData: function (character: PlayerCharacter) { this.data = [character.mount] },
+      visibility: [true, true, false],
+      setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
+        this.visibility = [hidden, fadeIn, fadeOut];
+      },
+    },
+    {
       id: "character-card-flying",
       type: "item",
       variant: CharacterSummaryItemVariant.FLYING,
       data: [this.character.flying],
       refreshData: function(character: PlayerCharacter) { this.data = [character.flying] },
+      visibility: [true, true, false],
+      setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
+        this.visibility = [hidden, fadeIn, fadeOut];
+      },
+    },
+    {
+      id: "character-card-visibility",
+      type: "item",
+      variant: CharacterSummaryItemVariant.VISIBILITY,
+      data: [this.character.visibility],
+      refreshData: function(character: PlayerCharacter) { this.data = [character.visibility] },
+      visibility: [true, true, false],
+      setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
+        this.visibility = [hidden, fadeIn, fadeOut];
+      },
+    },
+    {
+      id: "character-card-drunk",
+      type: "item",
+      variant: CharacterSummaryItemVariant.DRUNK,
+      data: [this.character.drunk],
+      refreshData: function (character: PlayerCharacter) { this.data = [character.drunk] },
+      visibility: [true, true, false],
+      setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
+        this.visibility = [hidden, fadeIn, fadeOut];
+      },
+    },
+    {
+      id: "character-card-mood",
+      type: "item",
+      variant: CharacterSummaryItemVariant.MOOD,
+      data: [this.character.mood],
+      refreshData: function (character: PlayerCharacter) { this.data = [character.mood] },
+      visibility: [true, true, false],
+      setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
+        this.visibility = [hidden, fadeIn, fadeOut];
+      },
+    },
+    {
+      id: "character-card-stance",
+      type: "item",
+      variant: CharacterSummaryItemVariant.STANCE,
+      data: [this.character.stance],
+      refreshData: function (character: PlayerCharacter) { this.data = [character.stance] },
+      visibility: [true, true, false],
+      setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
+        this.visibility = [hidden, fadeIn, fadeOut];
+      },
+    },
+    {
+      id: "character-card-quit",
+      type: "item",
+      variant: CharacterSummaryItemVariant.QUIT,
+      data: [this.character.combatQuit],
+      refreshData: function (character: PlayerCharacter) { this.data = [character.combatQuit] },
       visibility: [true, true, false],
       setVisibility: function ({ hidden, fadeIn, fadeOut }: { [index: string]: boolean }) {
         this.visibility = [hidden, fadeIn, fadeOut];
@@ -487,10 +553,16 @@ export enum CharacterSummaryItemVariant {
   ARMED,
   TIME,
   SPEED,
+  MOUNTED,
   FLYING,
   ENCUMBRANCE,
   POSITION,
   LANGUAGE,
   SCAN,
   LISTEN,
+  DRUNK,
+  MOOD,
+  STANCE,
+  QUIT,
+  VISIBILITY,
 }

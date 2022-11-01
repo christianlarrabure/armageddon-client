@@ -5,12 +5,7 @@
     @TODO: Character data to be used in the future
     <p>{{ character.longDescriptionStatus }}</p>
     <p>{{ character.longDescription }}</p>
-    <p>{{ character.visibility }}</p>
-    <p>{{ character.mount }}</p>
-    <p>{{ character.mood }}</p>
-    <p>{{ character.stance }}</p>
-    <p>{{ character.drunk }}</p>
-    <p>{{ character.combatQuit }}</p>
+    <p>{{ character.mounted }}</p>
   -->
 
   <!-- Character Card -->
@@ -18,7 +13,8 @@
     id="character-card"
     class="
       relative
-      p-4
+      p-3
+      mb-4
       bg-slate-800
       rounded
       select-none cursor-default
@@ -132,4 +128,5 @@
     [value]="getThirstValue()"
     [valueLabel]="character.thirst"
   ></app-segmented-attribute-progress-bar>
+  <app-character-summary-config-panel></app-character-summary-config-panel>
 </div>

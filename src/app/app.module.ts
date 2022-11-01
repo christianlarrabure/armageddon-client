@@ -10,7 +10,7 @@ import { NgTerminalModule } from 'ng-terminal';
 import { TopBarComponent } from './features/top-bar/top-bar.component';
 import { NgIconsModule } from '@ng-icons/core';
 import { heroUserSolid, heroScaleSolid } from '@ng-icons/heroicons/solid';
-import { jamSwordF } from '@ng-icons/jam-icons';
+import { jamAlienF, jamAlien, jamBeerF, jamDoor, jamSwordF } from '@ng-icons/jam-icons';
 import {
   matChairAlt,
   matBoy,
@@ -25,7 +25,7 @@ import {
   matLocationOn,
   matSettings,
 } from '@ng-icons/material-icons/baseline';
-import { ionFootsteps, ionEar, ionEye, ionLockOpen, ionLockClosed } from '@ng-icons/ionicons';
+import { ionFootsteps, ionFlag, ionEar, ionEye, ionLockOpen, ionLockClosed, ionShieldHalf, ionBug, ionWalk } from '@ng-icons/ionicons';
 import { featherFeather } from '@ng-icons/feather-icons';
 import { CharacterPanelComponent } from './features/character-panel/character-panel.component';
 import { AttributeProgressBarComponent } from './features/character-panel/attribute-progress-bar/attribute-progress-bar.component';
@@ -86,6 +86,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       matNightlight,
       matWbTwilight,
       matTranslate,
+      jamAlien,
+      jamAlienF,
+      jamDoor,
+      jamBeerF,
       jamSwordF,
       matFrontHand,
       heroScaleSolid,
@@ -96,8 +100,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       ionFootsteps,
       ionEar,
       ionEye,
+      ionFlag,
       ionLockOpen,
       ionLockClosed,
+      ionShieldHalf,
+      ionBug,
+      ionWalk,
       featherFeather,
     }),
     QuillModule.forRoot(),
