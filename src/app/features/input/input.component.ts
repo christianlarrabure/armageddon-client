@@ -16,8 +16,11 @@ export class InputComponent implements OnInit {
   ngOnInit(): void {}
 
   submitInput(event: Event) {
-    this.history.push(this.input);
-    this.historyPosition = this.history.length;
+    if (this.getLastHistory() !== this.input && this.input.length > 0) {
+      this.history.push(this.input);
+      this.historyPosition = this.history.length;
+    }
+
     console.log(this.input);
     if (event.target) {
       (event.target as HTMLInputElement).select();
@@ -66,5 +69,10 @@ export class InputComponent implements OnInit {
       this.historyPosition = this.historyPosition+1;
     }
     this.injectHistory();
+  }
+
+  getLastHistory(): string | null {
+    if (this.history.length === 0) return null;
+    return this.history[this.history.length - 1];
   }
 }
