@@ -19,6 +19,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { FeedViewComponent } from './components/feed-view/feed-view.component';
 import { TopicViewComponent } from './components/topic-view/topic-view.component';
 import { TopicEditComponent } from './components/topic-edit/topic-edit.component';
+import { TopicPricesEditComponent } from './components/topic-prices-edit/topic-prices-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TopicEditComponent } from './components/topic-edit/topic-edit.component
     FeedViewComponent,
     TopicViewComponent,
     TopicEditComponent,
+    TopicPricesEditComponent,
   ],
   imports: [
     CommonModule,

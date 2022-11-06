@@ -11,6 +11,8 @@ import {
 import { TelnetService } from '../../features/telnet.service';
 import Topic from '../../models/topic.model';
 import { ArmageddonService } from '../../armageddon/armageddon.service';
+import { TopicPricesService } from './topic-prices.service';
+import TopicPrice from 'src/app/models/topicPrice.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +20,8 @@ import { ArmageddonService } from '../../armageddon/armageddon.service';
 export class TopicsService {
   constructor(
     private telnet: TelnetService,
-    private armageddon: ArmageddonService
+    private armageddon: ArmageddonService,
+    private prices: TopicPricesService
   ) {}
 
   public smartSearchActive$ = new BehaviorSubject<boolean>(false);
@@ -45,7 +48,7 @@ export class TopicsService {
 
   private _topics$ = new Subject<Topic[]>();
   public selectedTopics$ = new Subject<Topic[]>();
-  public topics$ = this._topics$.asObservable();
+  public topics$ = this._topics$;
 
   private _topicsMentioned$ = combineLatest([
     this.topics$,

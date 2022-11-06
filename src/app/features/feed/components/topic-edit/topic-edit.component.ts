@@ -9,6 +9,8 @@ import { EFeedScreen } from '../../interfaces/FeedScreen.interface';
 import Topic from '../../../../models/topic.model';
 import { TopicsService } from '../../../../topics/services/topics.service';
 import { Observable } from 'rxjs';
+import { TopicPricesService } from '../../../../topics/services/topic-prices.service';
+import TopicPrice from '../../../../models/topicPrice.model';
 
 @Component({
   selector: 'app-topic-edit',
@@ -25,7 +27,12 @@ export class TopicEditComponent implements AfterViewInit {
     sdesc: '',
   };
 
-  constructor(private service: TopicsService) {}
+  topicPrices: TopicPrice[] = [];
+
+  constructor(
+    private service: TopicsService,
+    private prices: TopicPricesService
+  ) {}
 
   ngAfterViewInit(): void {
     this.editedTopic$?.subscribe((topic) => {

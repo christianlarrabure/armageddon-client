@@ -1,0 +1,31 @@
+<div class="w-full">
+  <table class="table-auto">
+    <thead>
+      <tr>
+        <th>Price</th>
+        <th>Location</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let price of prices">
+        <td>{{ price.price }}</td>
+        <td>{{ price.source }}</td>
+        <td><button class="text-xs bg-red-500 p-1 rounded">Delete</button></td>
+      </tr>
+      <tr>
+        <td>
+          <input type="number" [(ngModel)]="newPrice.price" placeholder="0" />
+        </td>
+        <td>
+          <input
+            type="text"
+            [(ngModel)]="newPrice.source"
+            placeholder="Location"
+          />
+        </td>
+        <td><button class="text-xs bg-green-500 p-1 rounded">Save</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

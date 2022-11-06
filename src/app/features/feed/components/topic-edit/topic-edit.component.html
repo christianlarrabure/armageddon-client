@@ -41,6 +41,21 @@
         [(ngModel)]="topic.content"
       ></textarea>
     </div>
+    <app-topic-prices-edit
+      *ngIf="topic.isA === 'object'"
+      [prices]="(topic.prices$ | async) ?? []"
+      [topic]="topic"
+      class="w-full"
+    ></app-topic-prices-edit>
+    <div class="w-full">
+      <p class="font-semibold text-xs mb-1">Notes</p>
+      <textarea
+        rows="5"
+        placeholder="Write your notes here"
+        class="bg-white w-full py-2 px-1 rounded-md text-black text-xs"
+        [(ngModel)]="topic.content"
+      ></textarea>
+    </div>
     <div class="flex w-full justify-center">
       <button
         class="bg-green-500 hover:bg-green-600 px-2 py-1 rounded-full flex gap-1 text-white items-center"

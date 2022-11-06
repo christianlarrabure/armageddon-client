@@ -46,8 +46,13 @@ export class TopicPricesService {
     setTimeout(this.refreshTopicPrices, delay);
   }
 
-  getTopicPricesByTopicId(topicId: number): Observable<TopicPrice[]> {
-    this.refreshTopicPrices();
+  getTopicPricesByTopicId(
+    topicId: number,
+    refresh: boolean = true
+  ): Observable<TopicPrice[]> {
+    if (refresh === true) {
+      this.refreshTopicPrices();
+    }
     return this.topicPrices$.pipe(
       map((topicPrices: TopicPrice[]) => {
         const filteredTopicPrices: TopicPrice[] = [];

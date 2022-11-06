@@ -171,8 +171,13 @@ export class ArmageddonService {
         this.sendCachedMessage();
       } else {
         setTimeout(() => {
+          if (this.cachedMessage.length > 0) {
+            console.warn(
+              `Delay triggered with a ${this.cachedMessage.length} char message.`
+            );
+          }
           this.sendCachedMessage();
-        }, 300);
+        }, 100);
       }
     });
     this._ipc.on('message', (_event: any, message: string) => {
