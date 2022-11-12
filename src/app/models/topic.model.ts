@@ -4,7 +4,7 @@ export default interface Topic {
   id?: number;
   name: string;
   content: string;
-  isA: 'concept' | 'character' | 'object';
+  isA: 'concept' | 'character' | 'object' | 'food';
   sdesc: string;
-  prices$?: Observable<TopicPrice[]>;
+  taste: string | undefined;
 }

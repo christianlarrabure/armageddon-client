@@ -11,8 +11,6 @@ import {
 import { TelnetService } from '../../features/telnet.service';
 import Topic from '../../models/topic.model';
 import { ArmageddonService } from '../../armageddon/armageddon.service';
-import { TopicPricesService } from './topic-prices.service';
-import TopicPrice from 'src/app/models/topicPrice.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +18,7 @@ import TopicPrice from 'src/app/models/topicPrice.model';
 export class TopicsService {
   constructor(
     private telnet: TelnetService,
-    private armageddon: ArmageddonService,
-    private prices: TopicPricesService
+    private armageddon: ArmageddonService
   ) {}
 
   public smartSearchActive$ = new BehaviorSubject<boolean>(false);
@@ -164,5 +161,12 @@ export class TopicsService {
   deleteTopic(id: number) {
     this.telnet.send('deleteTopic', id);
     this.refreshTopicsLater();
+  }
+
+  isTopicObject(topic: Topic): boolean {
+    if (topic.isA === 'object' || topic.isA === 'food') {
+      return true;
+    }
+    return false;
   }
 }

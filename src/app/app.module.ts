@@ -10,7 +10,13 @@ import { NgTerminalModule } from 'ng-terminal';
 import { TopBarComponent } from './features/top-bar/top-bar.component';
 import { NgIconsModule } from '@ng-icons/core';
 import { heroUserSolid, heroScaleSolid } from '@ng-icons/heroicons/solid';
-import { jamAlienF, jamAlien, jamBeerF, jamDoor, jamSwordF } from '@ng-icons/jam-icons';
+import {
+  jamAlienF,
+  jamAlien,
+  jamBeerF,
+  jamDoor,
+  jamSwordF,
+} from '@ng-icons/jam-icons';
 import {
   matChairAlt,
   matBoy,
@@ -25,11 +31,20 @@ import {
   matLocationOn,
   matSettings,
 } from '@ng-icons/material-icons/baseline';
-import { ionFootsteps, ionFlag, ionEar, ionEye, ionLockOpen, ionLockClosed, ionShieldHalf, ionBug, ionWalk } from '@ng-icons/ionicons';
+import {
+  ionFootsteps,
+  ionFlag,
+  ionEar,
+  ionEye,
+  ionLockOpen,
+  ionLockClosed,
+  ionShieldHalf,
+  ionBug,
+  ionWalk,
+} from '@ng-icons/ionicons';
 import { featherFeather } from '@ng-icons/feather-icons';
 import { CharacterPanelComponent } from './features/character-panel/character-panel.component';
 import { AttributeProgressBarComponent } from './features/character-panel/attribute-progress-bar/attribute-progress-bar.component';
-import { CharactersDialogComponent } from './features/characters-dialog/characters-dialog.component';
 import { TopicsDatabaseComponent } from './features/topics-database/topics-database.component';
 import { TopicViewerComponent } from './features/topics-database/topic-viewer/topic-viewer.component';
 import { SingleTopicViewComponent } from './features/topics-database/topic-viewer/single-topic-view/single-topic-view.component';
@@ -37,8 +52,6 @@ import { QuillModule } from 'ngx-quill';
 import { CheckboxComponent } from './features/input/checkbox/checkbox.component';
 import { ArmageddonModule } from './armageddon/armageddon.module';
 import { SharedModule } from './shared/shared.module';
-import { TopicViewModule } from './features/topic-view/topic-view.module';
-import { TopicEditorModule } from './features/topic-editor/topic-editor.module';
 import { SegmentedAttributeProgressBarComponent } from './features/character-panel/segmented-attribute-progress-bar/segmented-attribute-progress-bar.component';
 import { FeedModule } from './features/feed/feed.module';
 import { MirageModule } from './features/mirage/mirage.module';
@@ -55,7 +68,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TopBarComponent,
     CharacterPanelComponent,
     AttributeProgressBarComponent,
-    CharactersDialogComponent,
     TopicsDatabaseComponent,
     TopicViewerComponent,
     SingleTopicViewComponent,
@@ -68,9 +80,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     ArmageddonModule,
     SharedModule,
-    TopicViewModule,
     FeedModule,
-    TopicEditorModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

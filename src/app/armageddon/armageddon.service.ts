@@ -177,7 +177,7 @@ export class ArmageddonService {
             );
           }
           this.sendCachedMessage();
-        }, 100);
+        }, 150);
       }
     });
     this._ipc.on('message', (_event: any, message: string) => {

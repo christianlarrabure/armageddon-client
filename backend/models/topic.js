@@ -26,6 +26,11 @@ const Topic = sequelize.define("Topic", {
     default: "",
     allowNull: true,
   },
+  taste: {
+    type: Sequelize.STRING,
+    default: "",
+    allowNull: true,
+  },
 });
 
 Topic.sync({ alter: true })

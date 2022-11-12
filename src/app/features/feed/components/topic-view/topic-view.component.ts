@@ -14,6 +14,7 @@ export class TopicViewComponent implements OnInit {
     isA: 'concept',
     content: '',
     sdesc: '',
+    taste: '',
   };
 
   constructor(private service: TopicsService) {}

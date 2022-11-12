@@ -1,31 +1,43 @@
-<div class="w-full">
-  <table class="table-auto">
-    <thead>
-      <tr>
-        <th>Price</th>
-        <th>Location</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let price of prices">
-        <td>{{ price.price }}</td>
-        <td>{{ price.source }}</td>
-        <td><button class="text-xs bg-red-500 p-1 rounded">Delete</button></td>
-      </tr>
-      <tr>
-        <td>
-          <input type="number" [(ngModel)]="newPrice.price" placeholder="0" />
-        </td>
-        <td>
-          <input
-            type="text"
-            [(ngModel)]="newPrice.source"
-            placeholder="Location"
-          />
-        </td>
-        <td><button class="text-xs bg-green-500 p-1 rounded">Save</button></td>
-      </tr>
-    </tbody>
-  </table>
+<div class="w-full grid grid-cols-3 text-xs gap-1">
+  <div>Price</div>
+  <div>Location</div>
+  <div>Buttons</div>
+  <div class="col-span-3 grid grid-cols-3 gap-1" *ngFor="let price of prices">
+    <div>{{ price.price }} coins</div>
+    <div>{{ price.source }}</div>
+    <div>
+      <button
+        class="text-xs bg-red-500 p-1 rounded"
+        (click)="deleteTopicPrice(price.id)"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+  <div class="col-span-3 grid grid-cols-3 gap-1">
+    <div>
+      <input
+        type="number"
+        class="w-full text-black"
+        [(ngModel)]="newPrice.price"
+        placeholder="0"
+      />
+    </div>
+    <div>
+      <input
+        type="text"
+        class="w-full text-black"
+        [(ngModel)]="newPrice.source"
+        placeholder="Location"
+      />
+    </div>
+    <div>
+      <button
+        class="text-xs bg-green-500 p-0.5 rounded"
+        (click)="addTopicPrice()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
 </div>

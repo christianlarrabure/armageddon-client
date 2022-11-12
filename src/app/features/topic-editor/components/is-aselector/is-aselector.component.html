@@ -1,9 +1,0 @@
-<p class="text-gray-500 font-semibold text-sm">What kind of topic is this?</p>
-<div class="flex mt-2 gap-2">
-  <app-is-aoption
-    *ngFor="let option of options"
-    [label]="option"
-    (selectedTopic)="selectTopicType(option)"
-    [selected]="type === option"
-  ></app-is-aoption>
-</div>

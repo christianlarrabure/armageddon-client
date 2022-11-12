@@ -21,6 +21,7 @@
         <option value="concept">Concept</option>
         <option value="character">Character</option>
         <option value="object">Object</option>
+        <option value="food">Food</option>
       </select>
     </div>
     <div class="w-full" *ngIf="topic.isA !== 'concept'">
@@ -32,21 +33,15 @@
         [(ngModel)]="topic.sdesc"
       />
     </div>
-    <div class="w-full">
-      <p class="font-semibold text-xs mb-1">Notes</p>
+    <div class="w-full" *ngIf="topic.isA == 'food'">
+      <p class="font-semibold text-xs mb-1">Taste</p>
       <textarea
         rows="5"
-        placeholder="Write your notes here"
+        placeholder="Record the taste you perceived for this food item..."
         class="bg-white w-full py-2 px-1 rounded-md text-black text-xs"
-        [(ngModel)]="topic.content"
+        [(ngModel)]="topic.taste"
       ></textarea>
     </div>
-    <app-topic-prices-edit
-      *ngIf="topic.isA === 'object'"
-      [prices]="(topic.prices$ | async) ?? []"
-      [topic]="topic"
-      class="w-full"
-    ></app-topic-prices-edit>
     <div class="w-full">
       <p class="font-semibold text-xs mb-1">Notes</p>
       <textarea

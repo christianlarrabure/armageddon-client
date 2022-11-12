@@ -25,6 +25,7 @@ export class TopicEditComponent implements AfterViewInit {
     content: '',
     isA: 'object',
     sdesc: '',
+    taste: '',
   };
 
   topicPrices: TopicPrice[] = [];
